@@ -188,6 +188,7 @@
    pamixer
    hyprpaper
    hyprlock
+   hyprcursor
    wlogout
    neovim
    slurp
