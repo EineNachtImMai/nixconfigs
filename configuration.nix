@@ -199,6 +199,8 @@
    geeqie
    nwg-look
 
+   ripgrep
+
    (python3.withPackages (ps: with ps; [ numpy matplotlib manim ]))
    go
    gcc
@@ -221,6 +223,7 @@
    dunst
    libnotify
   #  wget
+  unzip
   ];
 
   environment.sessionVariables = {
