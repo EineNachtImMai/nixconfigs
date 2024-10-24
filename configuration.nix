@@ -1,30 +1,19 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # nix.settings.experimental-features = ["nix-command" "flakes"];
-
-  # boot.loader = {
-  #   grub = {
-  #     device = "nodev";
-  #     enable = true;
-  #     useOSProber = true;
-  #     efiSupport = true;
-  #   };
-  #   efi.canTouchEfiVariables = true;
-  # };
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -91,29 +80,16 @@
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.blackstar = {
     isNormalUser = true;
     description = "EineNachtImMai";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
-
-  # services.greetd = {
-  #   enable = true;
-  #   settings = rec {
-  #     initial_session = {
-  #       command = "${pkgs.hyprland}/bin/Hyprland";
-  #       user = "blackstar";
-  #     };
-  #     default_session = initial_session;
-  #   };
-  # };
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -122,21 +98,20 @@
   programs.hyprland.enable = true;
 
   programs.steam = {
-  enable = true;
-  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game localNetworkGameTransfers
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game localNetworkGameTransfers
   };
 
-
   # make zsh default
-  programs.zsh.enable = true;                                                                                                    
+  programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
   # # Enable Oh-my-zsh
   programs.zsh.ohMyZsh = {
     enable = true;
-     plugins = [ "git"];
+    plugins = ["git"];
   };
   programs.zsh.promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
   programs.zsh.autosuggestions.enable = true;
@@ -144,33 +119,13 @@
 
   # Fonts
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+    (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono"];})
   ];
-
-  # programs.neovim = {
-  # enable = true;
-  # configure = {
-  #   customRC = ''
-  #     set rnu
-  #     set cc=80
-  #     set list
-  #     set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
-  #     if &diff
-  #       colorscheme blue
-  #     endif
-  #   '';
-  #   packages.myVimPackage = with pkgs.vimPlugins; {
-  #     start = [ ctrlp ];
-  #     };
-  #   };
-  # };
 
   programs.neovim.defaultEditor = true;
 
-
   # Enable thunar as file manager
   programs.thunar.enable = true;
-
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -178,51 +133,52 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-   # lunarvim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-   kitty
-   wofi
-   zsh
-   git
-   waybar
-   brightnessctl
-   pamixer
-   hyprpaper
-   hyprlock
-   hyprcursor
-   gsettings
-   wlogout
-   neovim
-   slurp
-   grim
-   wl-clipboard
-   nerdfetch
-   vlc
-   geeqie
-   nwg-look
+    # lunarvim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    kitty
+    wofi
+    zsh
+    git
+    waybar
+    brightnessctl
+    pamixer
+    hyprpaper
+    hyprlock
+    hyprcursor
+    wlogout
+    neovim
+    slurp
+    grim
+    wl-clipboard
+    nerdfetch
+    vlc
+    geeqie
+    nwg-look
 
-   ripgrep
+    ripgrep
 
-   (python3.withPackages (ps: with ps; [ numpy matplotlib manim ]))
-   go
-   gcc
-   rustc
-   cargo
-   nodejs
+    (python3.withPackages (ps: with ps; [numpy matplotlib manim]))
+    go
+    gcc
+    rustc
+    cargo
+    nodejs
 
-   scribus
+    scribus
 
-  # Manim dependencies
-  cairo
-  pango
-  ffmpeg
-  texlive.combined.scheme-small
+    # Manim dependencies
+    cairo
+    pango
+    ffmpeg
+    texlive.combined.scheme-small
 
-   # networkmanagerapplet
-   dunst
-   libnotify
-  #  wget
-  unzip
-  catppuccin-cursors.mochaDark
+    alejandra
+
+    # networkmanagerapplet
+    dunst
+    libnotify
+    #  wget
+    unzip
+    catppuccin-cursors.mochaDark
   ];
 
   environment.sessionVariables = {
@@ -257,5 +213,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
