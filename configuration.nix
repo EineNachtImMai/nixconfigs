@@ -17,6 +17,8 @@
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  #
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -127,6 +129,21 @@
   # Enable thunar as file manager
   programs.thunar.enable = true;
 
+  services.keyd = {
+    enable = true;
+  };
+
+  programs.tmux = {
+    enable = true;
+    /* plugins = with pkgs.tmuxPlugins; [
+      sensible
+      vim-tmux-navigator
+      catppuccin
+      tmux-fzf
+      yank
+    ]; */
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -149,7 +166,7 @@
     slurp
     grim
     wl-clipboard
-    nerdfetch
+    fastfetch
     vlc
     geeqie
     nwg-look
@@ -162,6 +179,23 @@
     rustc
     cargo
     nodejs
+
+    SDL2
+    SDL2.dev
+    SDL2_ttf
+    # mesa
+    glslviewer
+    glsl_analyzer
+    glslls
+
+    #nix LSP
+    nixd
+
+    keyd
+
+    fzf
+    zoxide
+    yq
 
     scribus
 
