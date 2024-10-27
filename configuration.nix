@@ -5,7 +5,11 @@
   config,
   pkgs,
   ...
-}: {
+}: 
+let
+   lapkeyb = import ./kmonad-config/laptop-keyboard.kbd;
+in
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -134,7 +138,7 @@
       keyboards = {
         myKMonadOutput = {
           device = "/dev/input/by-id/usb-ASUSTek_TUF_GAMING_M5-if01-event-kbd";
-          config = builtins.readFile /home/blackstar/.config/kmonad/laptop-keyboard.kbd;
+                    config = builtins.readFile lapkeyb;
         };
       };
     };
