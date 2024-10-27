@@ -134,7 +134,7 @@
       keyboards = {
         myKMonadOutput = {
           device = "/dev/input/by-id/usb-ASUSTek_TUF_GAMING_M5-if01-event-kbd";
-          config = builtins.readFile /home/.config/kmonad/laptop-keyboard.kbd;
+          config = builtins.readFile /home/blackstar/.config/kmonad/laptop-keyboard.kbd;
         };
       };
     };
