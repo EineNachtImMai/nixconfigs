@@ -10,14 +10,10 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    inputs.xremap-flake.nixosModules.default
+    # inputs.xremap-flake.nixosModules.default
+    ./configs/xremap.nix
   ];
 
-  services.xremap = {
-    withHypr = true;
-    userName = "blackstar";
-    yamlConfig = ./xremap/config.yml;
-  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -137,10 +133,6 @@
   # Enable thunar as file manager
   programs.thunar.enable = true;
 
-  services.keyd = {
-    enable = true;
-  };
-
   programs.tmux = {
     enable = true;
     /* plugins = with pkgs.tmuxPlugins; [
@@ -198,8 +190,6 @@
 
     #nix LSP
     nixd
-
-    keyd
 
     fzf
     zoxide
