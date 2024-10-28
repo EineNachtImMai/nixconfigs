@@ -9,19 +9,15 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    kmonad = {
-      url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    xremap-flake.url = "github:xremap/nix-flake";
   };
 
-  outputs = { self, nixpkgs, kmonad, ... }@inputs: {
+  outputs = { self, nixpkgs, ... }@inputs: {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
         ./configuration.nix
         # inputs.home-manager.nixosModules.default
-        kmonad.nixosModules.default
       ];
     };
   };
