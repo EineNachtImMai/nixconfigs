@@ -10,8 +10,12 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # inputs.xremap-flake.nixosModules.default
     ./configs/xremap.nix
+    ./configs/terminal.nix
+    ./configs/packages.nix
+    ./configs/users.nix
+    ./configs/fonts.nix
+    ./configs/pipewire.nix
   ];
 
 
@@ -57,10 +61,10 @@
   # services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
-  services.xserver.xkb = {
+  /* services.xserver.xkb = {
     layout = "fr";
     variant = "azerty";
-  };
+  }; */
 
   # Configure console keymap
   console.keyMap = "fr";
@@ -69,33 +73,6 @@
   services.printing.enable = true;
 
   services.udisks2.enable = true;
-
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.blackstar = {
-    isNormalUser = true;
-    description = "EineNachtImMai";
-    extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [
-      #  thunderbird
-    ];
-  };
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -110,18 +87,6 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game localNetworkGameTransfers
   };
 
-  # make zsh default
-  programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
-
-  # # Enable Oh-my-zsh
-  programs.zsh.ohMyZsh = {
-    enable = true;
-    plugins = ["git"];
-  };
-  programs.zsh.promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-  programs.zsh.autosuggestions.enable = true;
-  programs.zsh.syntaxHighlighting.enable = true;
 
   # Fonts
   fonts.packages = with pkgs; [
@@ -147,71 +112,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    # lunarvim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    kitty
-    wofi
-    zsh
-    git
-    waybar
-    brightnessctl
-    pamixer
-    hyprpaper
-    hyprlock
-    hyprcursor
-    wlogout
-    neovim
-    slurp
-    grim
-    wl-clipboard
-    fastfetch
-    vlc
-    geeqie
-    nwg-look
-
-    ripgrep
-
-    (python3.withPackages (ps: with ps; [numpy matplotlib manim]))
-    go
-    gcc
-    rustc
-    cargo
-    nodejs
-
-    SDL2
-    SDL2.dev
-    SDL2_ttf
-    # mesa
-    glslviewer
-    glsl_analyzer
-    glslls
-
-    #nix LSP
-    nixd
-
-    fzf
-    zoxide
-    yq
-
-    scribus
-
-    # Manim dependencies
-    cairo
-    pango
-    ffmpeg
-    texlive.combined.scheme-small
-
-    alejandra
-
-    # networkmanagerapplet
-    dunst
-    libnotify
-    #  wget
-    unzip
-    catppuccin-cursors.mochaDark
-  ];
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSOR = "1";
