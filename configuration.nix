@@ -10,7 +10,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./configs/xremap.nix
+    # ./configs/xremap.nix
     ./configs/terminal.nix
     ./configs/packages.nix
     ./configs/users.nix
@@ -54,10 +54,10 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
@@ -80,6 +80,15 @@
   # Enable hyprland
   programs.hyprland.enable = true;
 
+  services.xserver = {
+    enable = true;
+    layout = "fr";
+    xkbVariant = "azerty";
+    displayManager = {
+      sddm.enable = true;
+    };
+  };
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
@@ -100,13 +109,11 @@
 
   programs.tmux = {
     enable = true;
-    /* plugins = with pkgs.tmuxPlugins; [
-      sensible
-      vim-tmux-navigator
-      catppuccin
-      tmux-fzf
-      yank
-    ]; */
+  };
+
+  services.kanata = {
+    enable = true;
+    keyboards.platform-i8042-serio-0-event-kbd.configFile = ./configs/kanata.kbd;
   };
 
   # Allow unfree packages

@@ -51,6 +51,8 @@
     zoxide
     yq
 
+    kanata-with-cmd
+
     scribus
 
     # Manim dependencies
