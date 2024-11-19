@@ -7,7 +7,7 @@
   users.users.blackstar = {
     isNormalUser = true;
     description = "EineNachtImMai";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "input" "uinput"];
     packages = with pkgs; [
       #  thunderbird
     ];

@@ -89,6 +89,20 @@
     };
   };
 
+  # enable auto-update
+
+  system.autoUpgrade = {
+    enable = true;
+    flake = inputs.self.outPath;
+    flags = [
+      "--update-input"
+      "nixpkgs"
+      "-L" # print build logs
+    ];
+    dates = "02:00";
+    randomizedDelaySec = "45min";
+  };
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
@@ -111,9 +125,25 @@
     enable = true;
   };
 
-  services.kanata = {
+  /* services.kanata = {
     enable = true;
-    keyboards.platform-i8042-serio-0-event-kbd.configFile = ./configs/kanata.kbd;
+    keyboards."/dev/input/by-path/platform-i8042-serio-0-event-kbd".configFile = ./configs/kanata.kbd;
+  }; */
+
+  services.udev.extraRules = ''
+  KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+  '';
+
+  security.sudo = {
+    enable = true;
+    extraRules = [{
+      users = ["blackstar"];
+      commands = [
+      {
+        command = "${pkgs.kanata}/bin/kanata";
+        options = ["NOPASSWD"];
+      }];
+    }];
   };
 
   # Allow unfree packages

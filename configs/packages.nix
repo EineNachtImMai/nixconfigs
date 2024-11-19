@@ -26,6 +26,7 @@
     vlc
     geeqie
     nwg-look
+    # nh
 
     ripgrep
 
@@ -52,6 +53,8 @@
     yq
 
     kanata-with-cmd
+    # gtypist
+    klavaro
 
     scribus
 
@@ -62,6 +65,8 @@
     texlive.combined.scheme-small
 
     alejandra
+
+    spotify
 
     # networkmanagerapplet
     dunst
