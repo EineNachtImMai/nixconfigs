@@ -36,6 +36,8 @@
     rustc
     cargo
     nodejs
+    lua5_1
+    luarocks
 
     SDL2
     SDL2.dev
@@ -47,6 +49,8 @@
 
     #nix LSP
     nixd
+
+    itch
 
     fzf
     zoxide

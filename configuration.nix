@@ -16,6 +16,7 @@
     ./configs/users.nix
     ./configs/fonts.nix
     ./configs/pipewire.nix
+    ./configs/image_nvim.nix
   ];
 
 
