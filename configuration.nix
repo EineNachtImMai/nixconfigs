@@ -16,7 +16,7 @@
     ./configs/users.nix
     ./configs/fonts.nix
     ./configs/pipewire.nix
-    ./configs/image_nvim.nix
+    # ./configs/image_nvim.nix
   ];
 
 
@@ -81,10 +81,14 @@
   # Enable hyprland
   programs.hyprland.enable = true;
 
-  services.xserver = {
-    enable = true;
-    layout = "fr";
-    xkbVariant = "azerty";
+  services = {
+    xserver = {
+      enable = true;
+      xkb = {
+        variant = "azerty";
+        layout = "fr";
+      };
+    };
     displayManager = {
       sddm.enable = true;
     };
@@ -121,6 +125,8 @@
 
   # Enable thunar as file manager
   programs.thunar.enable = true;
+
+  # programs.kdeconnect.enable = true;
 
   programs.tmux = {
     enable = true;
@@ -175,6 +181,15 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+  /* networking.firewall = { 
+    enable = true;
+    allowedTCPPortRanges = [ 
+      { from = 1714; to = 1764; } # KDE Connect
+    ];  
+    allowedUDPPortRanges = [ 
+      { from = 1714; to = 1764; } # KDE Connect
+    ];  
+  };   */
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

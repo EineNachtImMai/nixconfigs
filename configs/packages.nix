@@ -36,8 +36,13 @@
     rustc
     cargo
     nodejs
-    lua5_1
+    luajit
     luarocks
+    imagemagick
+    pkg-config
+    # luajitPackages.magick
+    
+    graphviz
 
     SDL2
     SDL2.dev
@@ -50,7 +55,6 @@
     #nix LSP
     nixd
 
-    itch
 
     fzf
     zoxide
@@ -71,6 +75,8 @@
     alejandra
 
     spotify
+    itch
+    ryujinx
 
     # networkmanagerapplet
     dunst
@@ -78,5 +84,12 @@
     #  wget
     unzip
     catppuccin-cursors.mochaDark
+
+
+
+    # plasma5Packages.kdeconnect-kde
+
+
+    obsidian
   ];
 }
