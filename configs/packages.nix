@@ -88,6 +88,9 @@
 
 
     # plasma5Packages.kdeconnect-kde
+    gimp
+
+    pokemmo-installer
 
 
     obsidian
