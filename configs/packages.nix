@@ -93,6 +93,7 @@
     pokemmo-installer
 
 
+
     obsidian
   ];
 }

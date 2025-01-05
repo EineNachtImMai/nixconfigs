@@ -10,7 +10,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # ./configs/xremap.nix
+    ./configs/nvim.nix
     ./configs/terminal.nix
     ./configs/packages.nix
     ./configs/users.nix
