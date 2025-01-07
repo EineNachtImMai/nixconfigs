@@ -10,7 +10,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./configs/nvim.nix
+    # ./configs/nvim.nix
     ./configs/terminal.nix
     ./configs/packages.nix
     ./configs/users.nix
@@ -89,8 +89,11 @@
         layout = "fr";
       };
     };
-    displayManager = {
-      sddm.enable = true;
+    displayManager.sddm = {
+      enable = true;
+      theme = "sddm-astronaut-theme";
+      package = pkgs.kdePackages.sddm;
+      extraPackages = with pkgs; [sddm-astronaut];
     };
   };
 

@@ -92,6 +92,7 @@
 
     pokemmo-installer
 
+    sddm-astronaut
 
 
     obsidian
