@@ -17,6 +17,7 @@
     ./configs/fonts.nix
     ./configs/pipewire.nix
     # ./configs/image_nvim.nix
+    ./configs/nvf-configuration.nix
   ];
 
 
@@ -101,7 +102,7 @@
 
   system.autoUpgrade = {
     enable = true;
-    flake = inputs.self.outPath;
+    flake = "./flake.nix";
     flags = [
       "--update-input"
       "nixpkgs"
@@ -119,10 +120,6 @@
   };
 
 
-  # Fonts
-  fonts.packages = with pkgs; [
-    (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono"];})
-  ];
 
   programs.neovim.defaultEditor = true;
 
@@ -155,6 +152,7 @@
       }];
     }];
   };
+
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
