@@ -17,7 +17,7 @@
     ./configs/fonts.nix
     ./configs/pipewire.nix
     # ./configs/image_nvim.nix
-    ./configs/nvf-configuration.nix
+    # ./configs/nvf-configuration.nix
   ];
 
 
@@ -119,6 +119,7 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game localNetworkGameTransfers
   };
 
+  security.polkit.enable = true;
 
 
   programs.neovim.defaultEditor = true;

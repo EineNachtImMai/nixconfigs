@@ -1,3 +1,4 @@
+# TODO: clean things up
 {
   pkgs,
   ...
@@ -52,8 +53,17 @@
     glsl_analyzer
     glslls
 
-    #nix LSP
+    # LSPs
     nixd
+    lua-language-server
+    gopls
+    hyprls
+    marksman
+    yaml-language-server
+    typescript-language-server
+    haskell-language-server
+    bash-language-server
+    arduino-language-server
 
 
     fzf
@@ -73,6 +83,12 @@
     texlive.combined.scheme-small
 
     alejandra
+    stylua
+    rustfmt
+    isort
+    black
+    gotools
+
 
     spotify
     itch
@@ -85,6 +101,8 @@
     unzip
     catppuccin-cursors.mochaDark
 
+    gparted
+
 
 
     # plasma5Packages.kdeconnect-kde
@@ -93,6 +111,12 @@
     pokemmo-installer
 
     sddm-astronaut
+
+    kando
+
+    lazygit
+
+    yazi
 
 
     obsidian
