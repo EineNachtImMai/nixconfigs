@@ -10,16 +10,13 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # ./configs/nvim.nix
     ./configs/terminal.nix
     ./configs/packages.nix
     ./configs/users.nix
     ./configs/fonts.nix
     ./configs/pipewire.nix
-    # ./configs/image_nvim.nix
-    # ./configs/nvf-configuration.nix
+    ./configs/wireless.nix
   ];
-
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -28,14 +25,56 @@
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   #
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    ensureProfiles = {
+        profiles = {
+            home-wifi = {
+                connection.id = "home-wifi";
+                connection.type = "wifi";
+                wifi.ssid = "Livebox-2282";
+                wifi-security.psk = "${config.sops.secrets."wifi/Livebox-2282/password".path}";
+            };
+            phone-share = {
+                connection.id = "phone-share";
+                connection.type = "wifi";
+                wifi.ssid = "La lumière divine";
+                wifi-security.psk = "${config.sops.secrets."wifi/La-lumière-divine/password".path}";
+            };
+            eduroam = {
+                connection.id = "eduroam";
+                connection.type = "wifi";
+                wifi.ssid = "eduroam";
+                wifi-security = {
+                    key-mgmt = "wpa-eap";
+                    eap = "PWD";
+                    identity = "${config.sops.secrets."wifi/eduroam/identity".path}";
+                    password = "${config.sops.secrets."wifi/eduroam/password".path}";
+                };
+            };
+            Bordeaux-INP = {
+                connection.id = "Bordeaux-INP";
+                connection.type = "wifi";
+                wifi.ssid = "Bordeaux-INP";
+                wifi-security = {
+                    key-mgmt = "wpa-eap";
+                    eap = "MSCHAPv2";
+                    identity = "${config.sops.secrets."wifi/Bordeaux-INP/identity".path}";
+                    password = "${config.sops.secrets."wifi/Bordeaux-INP/password".path}";
+                };
+            };
+        };
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -55,19 +94,6 @@
     LC_TIME = "fr_FR.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  /* services.xserver.xkb = {
-    layout = "fr";
-    variant = "azerty";
-  }; */
-
   # Configure console keymap
   console.keyMap = "fr";
 
@@ -78,6 +104,14 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+
+  programs.gnupg.agent.enable = true;
+
+  programs.yazi = {
+    flavors = {
+      dark = ./yazi/flavors/kanagawa.yazi/flavor.toml;
+    };
+  };
 
   # Enable hyprland
   programs.hyprland.enable = true;
@@ -95,6 +129,80 @@
       theme = "sddm-astronaut-theme";
       package = pkgs.kdePackages.sddm;
       extraPackages = with pkgs; [sddm-astronaut];
+    };
+  };
+
+  services.kanata = {
+    enable = true;
+    keyboards = {
+      internalKeyboard = {
+        devices = [
+          "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
+          "/dev/input/by-path/pci-0000:03:00.4-usb-0:2.3:1.0-event-kbd"
+          "/dev/input/by-path/pci-0000:03:00.4-usb-0:2.4:1.0-event-kbd"
+          "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2.3:1.0-event-kbd"
+          "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2.4:1.0-event-kbd"
+        ];
+        extraDefCfg = "process-unmapped-keys yes";
+        config = ''
+          (defsrc
+          grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+          tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+          caps a    s    d    f    g    h    j    k    l    ;    '    ret
+          lsft z    x    c    v    b    n    m    ,    .    /    rsft
+          lctl lmet lalt           spc            ralt rmet rctl
+          )
+          (defvar
+              tap-time 150
+              hold-time 200
+          )
+          (defalias
+              cmd-lyr (layer-toggle command-layer)
+              caps (tap-hold 150 200 esc @cmd-lyr)
+              a (tap-hold $tap-time $hold-time a lsft)
+              s (tap-hold $tap-time $hold-time s lctl)
+              d (tap-hold $tap-time $hold-time d lmet)
+              f (tap-hold $tap-time $hold-time f lalt)
+
+              m (tap-hold $tap-time $hold-time m lsft)
+              l (tap-hold $tap-time $hold-time l lctl)
+              k (tap-hold $tap-time $hold-time k lmet)
+              j (tap-hold $tap-time $hold-time j lalt)
+          )
+
+          (deflayer base
+          _  _    _    _    _    _    _    _    _    _    _    _    _    _
+          _  _    _    _    _    _    _    _    _    _    _    _    _    _
+          @caps @a    @s    @d    @f    _    _    _    _    _    _    _    _
+          _ _    _    _    _    _    _    _    _    _    _    _
+          _ _ _           _            _ _ _
+          )
+
+          (deflayer empty-layer
+          _  _    _    _    _    _    _    _    _    _    _    _    _    _
+          _  _    _    _    _    _    _    _    _    _    _    _    _    _
+          _ _    _    _    _    _    _    _    _    _    _    _    _
+          _ _    _    _    _    _    _    _    _    _    _    _
+          _ _ _           _            _ _ _
+          )
+
+          (deflayer dvorak
+          grv  1    2    3    4    5    6    7    8    9    0    [    ]    bspc
+          tab  '    ,    .    p    y    f    g    c    r    l    /    =    \
+          caps a    o    e    u    i    d    h    t    n    s    -    ret
+          lsft ;    q    j    k    x    b    m    w    v    z    rsft
+          lctl lmet lalt           spc            ralt rmet rctl
+          )
+
+          (deflayer command-layer
+          _  _    _    _    _    _    _    _    _    _    _    _    _    _
+          _  _    _    _    _    _    _    _    _    _    _    _    _    _
+          _ b    _    _    _    _    _    @j    @k    @l    @m    _    _
+          _ _    _    _    _    _    _    _    _    _    _    _
+          _ _ _           _            _ _ _
+          )
+        '';
+      };
     };
   };
 
@@ -121,7 +229,6 @@
 
   security.polkit.enable = true;
 
-
   programs.neovim.defaultEditor = true;
 
   # Enable thunar as file manager
@@ -133,31 +240,34 @@
     enable = true;
   };
 
-  /* services.kanata = {
+  /*
+     services.kanata = {
     enable = true;
     keyboards."/dev/input/by-path/platform-i8042-serio-0-event-kbd".configFile = ./configs/kanata.kbd;
-  }; */
+  };
+  */
 
   services.udev.extraRules = ''
-  KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+    KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
   '';
 
   security.sudo = {
     enable = true;
-    extraRules = [{
-      users = ["blackstar"];
-      commands = [
+    extraRules = [
       {
-        command = "${pkgs.kanata}/bin/kanata";
-        options = ["NOPASSWD"];
-      }];
-    }];
+        users = ["blackstar"];
+        commands = [
+          {
+            command = "${pkgs.kanata}/bin/kanata";
+            options = ["NOPASSWD"];
+          }
+        ];
+      }
+    ];
   };
-
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSOR = "1";
@@ -183,15 +293,17 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-  /* networking.firewall = { 
+  /*
+     networking.firewall = {
     enable = true;
-    allowedTCPPortRanges = [ 
+    allowedTCPPortRanges = [
       { from = 1714; to = 1764; } # KDE Connect
-    ];  
-    allowedUDPPortRanges = [ 
+    ];
+    allowedUDPPortRanges = [
       { from = 1714; to = 1764; } # KDE Connect
-    ];  
-  };   */
+    ];
+  };
+  */
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
