@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     sops-nix.url = "github:Mic92/sops-nix";
+    zen-browser.url = "github:MarceColl/zen-browser-flake";
   };
 
   outputs = {
@@ -9,9 +10,10 @@
     nixpkgs,
     sops-nix,
     ...
-  }@inputs: {
+  } @ inputs: {
     # ↓ this is your host output in the flake schema
     nixosConfigurations.blackstar = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       modules = [
         ./configuration.nix # <- your host entrypoint, `programs.nvf.*` may be defined here

@@ -15,6 +15,7 @@
     ./configs/users.nix
     ./configs/fonts.nix
     ./configs/pipewire.nix
+    inputs.sops-nix.nixosModules.sops
     ./configs/wireless.nix
   ];
 
@@ -27,55 +28,9 @@
   #
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-
-
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager = {
-    enable = true;
-    ensureProfiles = {
-        profiles = {
-            home-wifi = {
-                connection.id = "home-wifi";
-                connection.type = "wifi";
-                wifi.ssid = "Livebox-2282";
-                wifi-security.psk = "${config.sops.secrets."wifi/Livebox-2282/password".path}";
-            };
-            phone-share = {
-                connection.id = "phone-share";
-                connection.type = "wifi";
-                wifi.ssid = "La lumière divine";
-                wifi-security.psk = "${config.sops.secrets."wifi/La-lumière-divine/password".path}";
-            };
-            eduroam = {
-                connection.id = "eduroam";
-                connection.type = "wifi";
-                wifi.ssid = "eduroam";
-                wifi-security = {
-                    key-mgmt = "wpa-eap";
-                    eap = "PWD";
-                    identity = "${config.sops.secrets."wifi/eduroam/identity".path}";
-                    password = "${config.sops.secrets."wifi/eduroam/password".path}";
-                };
-            };
-            Bordeaux-INP = {
-                connection.id = "Bordeaux-INP";
-                connection.type = "wifi";
-                wifi.ssid = "Bordeaux-INP";
-                wifi-security = {
-                    key-mgmt = "wpa-eap";
-                    eap = "MSCHAPv2";
-                    identity = "${config.sops.secrets."wifi/Bordeaux-INP/identity".path}";
-                    password = "${config.sops.secrets."wifi/Bordeaux-INP/password".path}";
-                };
-            };
-        };
-    };
-  };
-
   # Set your time zone.
   time.timeZone = "Europe/Paris";
 
@@ -157,14 +112,13 @@
               hold-time 200
           )
           (defalias
-              cmd-lyr (layer-toggle command-layer)
-              caps (tap-hold 150 200 esc @cmd-lyr)
+              caps (tap-hold 150 200 esc lctl)
               a (tap-hold $tap-time $hold-time a lsft)
               s (tap-hold $tap-time $hold-time s lctl)
               d (tap-hold $tap-time $hold-time d lmet)
               f (tap-hold $tap-time $hold-time f lalt)
 
-              m (tap-hold $tap-time $hold-time m lsft)
+              m (tap-hold $tap-time $hold-time ; lsft)
               l (tap-hold $tap-time $hold-time l lctl)
               k (tap-hold $tap-time $hold-time k lmet)
               j (tap-hold $tap-time $hold-time j lalt)
@@ -173,7 +127,7 @@
           (deflayer base
           _  _    _    _    _    _    _    _    _    _    _    _    _    _
           _  _    _    _    _    _    _    _    _    _    _    _    _    _
-          @caps @a    @s    @d    @f    _    _    _    _    _    _    _    _
+          @caps @a    @s    @d    @f    _    _    @j    @k    @l    @m    _    _
           _ _    _    _    _    _    _    _    _    _    _    _
           _ _ _           _            _ _ _
           )
@@ -192,14 +146,6 @@
           caps a    o    e    u    i    d    h    t    n    s    -    ret
           lsft ;    q    j    k    x    b    m    w    v    z    rsft
           lctl lmet lalt           spc            ralt rmet rctl
-          )
-
-          (deflayer command-layer
-          _  _    _    _    _    _    _    _    _    _    _    _    _    _
-          _  _    _    _    _    _    _    _    _    _    _    _    _    _
-          _ b    _    _    _    _    _    @j    @k    @l    @m    _    _
-          _ _    _    _    _    _    _    _    _    _    _    _
-          _ _ _           _            _ _ _
           )
         '';
       };

@@ -1,5 +1,9 @@
 # TODO: clean things up
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -7,6 +11,9 @@
 
     # terminal
     kitty
+
+    # inputs.zen-browser.packages."${system}".generic
+    (callPackage ./zen.nix {})
 
     # terminal multiplexer
     zellij
@@ -19,6 +26,15 @@
     zsh
 
     wpa_supplicant_gui
+
+    spotify-player
+    spicetify-cli
+
+    pipewire
+    wireplumber
+    xdg-desktop-portal-hyprland
+
+    discord
 
     # secrets manager
     sops
@@ -77,6 +93,11 @@
     # pkg-config
     # luajitPackages.magick
     sqlite
+
+    jq
+    pandoc
+
+    vipsdisp
 
     mdbook
 
