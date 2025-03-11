@@ -17,7 +17,9 @@
     ./configs/pipewire.nix
     inputs.sops-nix.nixosModules.sops
     ./configs/wireless.nix
+    ./configs/home.nix
   ];
+
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -59,6 +61,7 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+  # disabled because of the recent privacy poicy changed, finally motivated me to get zen-browser working on nixos
 
   programs.gnupg.agent.enable = true;
 
@@ -93,8 +96,9 @@
       internalKeyboard = {
         devices = [
           "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
-          "/dev/input/by-path/pci-0000:03:00.4-usb-0:2.3:1.0-event-kbd"
-          "/dev/input/by-path/pci-0000:03:00.4-usb-0:2.4:1.0-event-kbd"
+          "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2:1.0-event-kbd"
+          "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2.1:1.0-event-kbd"
+          "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2.2:1.0-event-kbd"
           "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2.3:1.0-event-kbd"
           "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2.4:1.0-event-kbd"
         ];
@@ -112,7 +116,10 @@
               hold-time 200
           )
           (defalias
-              caps (tap-hold 150 200 esc lctl)
+            cmd-lyr (layer-toggle command-layer)
+          )
+          (defalias
+              caps (tap-hold 150 200 esc @cmd-lyr)
               a (tap-hold $tap-time $hold-time a lsft)
               s (tap-hold $tap-time $hold-time s lctl)
               d (tap-hold $tap-time $hold-time d lmet)
@@ -140,12 +147,12 @@
           _ _ _           _            _ _ _
           )
 
-          (deflayer dvorak
-          grv  1    2    3    4    5    6    7    8    9    0    [    ]    bspc
-          tab  '    ,    .    p    y    f    g    c    r    l    /    =    \
-          caps a    o    e    u    i    d    h    t    n    s    -    ret
-          lsft ;    q    j    k    x    b    m    w    v    z    rsft
-          lctl lmet lalt           spc            ralt rmet rctl
+          (deflayer command-layer
+          _  _    _    _    _    _    _    _    _    _    _    _    _    _
+          _  _    _    ret    _    _    _    _    _    _    _    _    _    _
+          @caps _    _    _    _    _    left    down    up    right    _    _    _
+          _ _    _    _    _    _    _    _    _    _    _    _
+          _ _ _           _            _ _ _
           )
         '';
       };

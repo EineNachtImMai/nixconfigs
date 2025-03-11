@@ -24,6 +24,9 @@
 
     # shell
     zsh
+    nushell
+    carapace
+    starship
 
     wpa_supplicant_gui
 
@@ -35,6 +38,26 @@
     xdg-desktop-portal-hyprland
 
     discord
+
+    # NOTE: script for rebuilding my config without having to run multiple commands and deal with the outputs
+    (
+      writeShellApplication {
+        name = "rebuild";
+        runtimeInputs = [];
+        text = ''
+          #!/usr/bin/env bash
+
+          echo "Formatting dotfiles..."
+          alejandra /etc/nixos &>/dev/null || ( alejandra . ; echo "formatting failed!" && exit 1)
+          echo "rebuilding NixOS..."
+          log_path="/home/blackstar/.nix-log/$(date -d today +%F--%T).log"
+          nixos-rebuild switch --flake /etc/nixos#blackstar --upgrade --show-trace 2>> "$log_path" || (grep -f "$log_path" --color error && exit 1)
+          echo "collecting garbage..."
+          nix-collect-garbage -d --delete-older-than 10d 2>> "$log_path" || (grep -f "$log_path" --color error && exit 1)
+          echo "Done!"
+        '';
+      }
+    )
 
     # secrets manager
     sops
@@ -81,7 +104,7 @@
     ripgrep
 
     # programming languages
-    (python3.withPackages (ps: with ps; [numpy matplotlib manim opencv4]))
+    (python3.withPackages (ps: with ps; [numpy matplotlib manim opencv4 scikit-learn]))
     go
     gcc
     rustc
@@ -93,6 +116,11 @@
     # pkg-config
     # luajitPackages.magick
     sqlite
+
+    # haskell
+    ghc
+    cabal-install
+    stack
 
     jq
     pandoc

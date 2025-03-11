@@ -1,8 +1,4 @@
-{
-  pkgs,
-  ...
-  }:
-{
+{pkgs, ...}: {
   # make zsh default
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;

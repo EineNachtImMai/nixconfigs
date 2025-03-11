@@ -1,10 +1,6 @@
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   # Fonts
-  fonts.packages =  [
+  fonts.packages = [
     pkgs.nerd-fonts.fira-code
     pkgs.nerd-fonts._0xproto
     pkgs.nerd-fonts.droid-sans-mono

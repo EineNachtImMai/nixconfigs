@@ -3,6 +3,13 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     sops-nix.url = "github:Mic92/sops-nix";
     zen-browser.url = "github:MarceColl/zen-browser-flake";
+
+    hyprland.url = "github:hyprwm/Hyprland/v0.46.2";
+
+    hyprtasking = {
+      url = "github:raybbian/hyprtasking";
+      # inputs.hyprland.follows = "hyprland";
+    };
   };
 
   outputs = {
