@@ -1,27 +1,34 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
 
-    hyprland.url = "github:hyprwm/Hyprland/v0.46.2";
+    hyprland.url = "github:hyprwm/Hyprland";
 
     hyprtasking = {
       url = "github:raybbian/hyprtasking";
-      # inputs.hyprland.follows = "hyprland";
+      inputs.hyprland.follows = "hyprland";
     };
   };
 
   outputs = {
-    self,
     nixpkgs,
     sops-nix,
     ...
-  } @ inputs: {
+  } @ inputs: let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      config = {
+        allowUnfree = true;
+      };
+    };
+  in {
     # ↓ this is your host output in the flake schema
     nixosConfigurations.blackstar = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {inherit inputs;};
+      specialArgs = {inherit inputs system;};
       modules = [
         ./configuration.nix # <- your host entrypoint, `programs.nvf.*` may be defined here
         sops-nix.nixosModules.sops

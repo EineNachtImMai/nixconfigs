@@ -17,9 +17,15 @@
     ./configs/pipewire.nix
     inputs.sops-nix.nixosModules.sops
     ./configs/wireless.nix
-    ./configs/home.nix
+    inputs.home-manager.nixosModules.home-manager
   ];
 
+  home-manager = {
+    extraSpecialArgs = {inherit inputs;};
+    users = {
+      blackstar = import ./configs/home.nix;
+    };
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

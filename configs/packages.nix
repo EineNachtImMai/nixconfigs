@@ -12,6 +12,8 @@
     # terminal
     kitty
 
+    home-manager
+
     # inputs.zen-browser.packages."${system}".generic
     (callPackage ./zen.nix {})
 
@@ -81,6 +83,9 @@
     neovim
     markdown-oxide
 
+    # uninstall instantly after the statistics test
+    rstudio
+
     # screenshot utilities
     slurp
     grim
@@ -104,7 +109,7 @@
     ripgrep
 
     # programming languages
-    (python3.withPackages (ps: with ps; [numpy matplotlib manim opencv4 scikit-learn]))
+    (python3.withPackages (ps: with ps; [numpy matplotlib manim opencv4 scikit-learn astropy]))
     go
     gcc
     rustc
