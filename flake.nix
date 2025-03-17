@@ -5,6 +5,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
 
+    catppuccin.url = "github:catppuccin/nix";
+
     hyprland.url = "github:hyprwm/Hyprland";
 
     hyprtasking = {
@@ -16,6 +18,8 @@
   outputs = {
     nixpkgs,
     sops-nix,
+    catppuccin,
+    home-manager,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -32,6 +36,7 @@
       modules = [
         ./configuration.nix # <- your host entrypoint, `programs.nvf.*` may be defined here
         sops-nix.nixosModules.sops
+        catppuccin.nixosModules.catppuccin
       ];
     };
   };

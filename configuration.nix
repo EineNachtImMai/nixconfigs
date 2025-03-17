@@ -20,16 +20,25 @@
     inputs.home-manager.nixosModules.home-manager
   ];
 
+  catppuccin = {
+    tty.enable = true;
+  };
+
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
     users = {
       blackstar = import ./configs/home.nix;
     };
+    backupFileExtension = "bak";
   };
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+    };
+    systemd-boot.enable = true;
+  };
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -90,9 +99,8 @@
     };
     displayManager.sddm = {
       enable = true;
-      theme = "sddm-astronaut-theme";
+      theme = "catppuccin-mocha";
       package = pkgs.kdePackages.sddm;
-      extraPackages = with pkgs; [sddm-astronaut];
     };
   };
 

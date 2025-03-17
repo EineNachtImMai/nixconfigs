@@ -12,6 +12,8 @@
     # terminal
     kitty
 
+    catppuccin-sddm
+
     home-manager
 
     # inputs.zen-browser.packages."${system}".generic
@@ -77,7 +79,6 @@
     wlogout
     dunst
     libnotify
-    sddm-astronaut
 
     # Text editor
     neovim
