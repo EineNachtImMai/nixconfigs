@@ -4,16 +4,17 @@
   inputs,
   ...
 }: {
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # lunarvim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-
     # terminal
     kitty
 
+    # nicer cat
+    bat
+
+    # sddm theme
     catppuccin-sddm
 
+    # self-explanatory
     home-manager
 
     # inputs.zen-browser.packages."${system}".generic
@@ -22,25 +23,31 @@
     # terminal multiplexer
     zellij
 
+    # task manager
+    todoist-electron
+
+    # manual pages
+    tealdeer
+    # wikiman
+
     # app launchers
     wofi
-    kando
+    # kando
 
     # shell
     zsh
     nushell
-    carapace
+    # carapace
     starship
 
+    # network manager
     wpa_supplicant_gui
-
-    spotify-player
-    spicetify-cli
 
     pipewire
     wireplumber
     xdg-desktop-portal-hyprland
 
+    # chat app
     discord
 
     # NOTE: script for rebuilding my config without having to run multiple commands and deal with the outputs
@@ -63,6 +70,9 @@
       }
     )
 
+    # video, audio, ... VLC is the greatest
+    vlc
+
     # secrets manager
     sops
 
@@ -72,6 +82,7 @@
     # random hyprland/wayland config/ricing stuff
     waybar
     brightnessctl
+    playerctl
     pamixer
     hyprpaper
     hyprlock
@@ -82,9 +93,9 @@
 
     # Text editor
     neovim
-    markdown-oxide
+    # markdown-oxide
 
-    # uninstall instantly after the statistics test
+    # TODO: uninstall instantly after the statistics test
     rstudio
 
     # screenshot utilities
@@ -95,38 +106,48 @@
     # neofetch replacement
     fastfetch
 
-    # video player
-    vlc
-
-    zoom-us
-
     # lightweight image viewer
     geeqie
-
-    # GTK settings editor, because i struggled with my corsor for a while
-    nwg-look
 
     # recursively search a dir for some text (really a regex but shhhhhhhh)
     ripgrep
 
     # programming languages
-    (python3.withPackages (ps: with ps; [numpy matplotlib manim opencv4 scikit-learn astropy]))
+    (python3.withPackages (
+      ps:
+        with ps; [
+          numpy
+          matplotlib
+          manim
+          opencv4
+          scikit-learn
+          astropy
+          beautifulsoup4
+          pandas
+          lxml
+        ]
+    ))
     go
     gcc
     rustc
     cargo
+    rustlings
     nodejs
-    # luajit
-    # luarocks
-    # imagemagick
-    # pkg-config
-    # luajitPackages.magick
     sqlite
 
     # haskell
     ghc
     cabal-install
     stack
+
+    # requirements for nvim plugins
+    imagemagick
+    mermaid-cli
+    ghostscript
+    tree-sitter
+    (
+      texlive.combine {inherit (pkgs.texlive) scheme-medium standalone varwidth preview;}
+    )
 
     jq
     pandoc
@@ -175,7 +196,7 @@
     gopls
     yaml-language-server
     pyright
-    # rust-analyzer
+    rust-analyzer
     # TODO: make all the following work with neovim, currently only the previous ones are working.
     typescript-language-server
     haskell-language-server
@@ -227,7 +248,10 @@
     catppuccin-cursors.mochaDark
 
     # image editor that's like photoshop except very open and with slightly worse UI. Also it's free.
-    # gimp
+    gimp
+
+    # vector image editor
+    inkscape
 
     # great git TUI because I DON'T KNOW how to use git other than clone pull push add commit, I swear I'll get to learning it eventually.
     lazygit

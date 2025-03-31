@@ -18,6 +18,7 @@
     inputs.sops-nix.nixosModules.sops
     ./configs/wireless.nix
     inputs.home-manager.nixosModules.home-manager
+    ./configs/virtualization.nix
   ];
 
   catppuccin = {
