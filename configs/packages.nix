@@ -1,15 +1,21 @@
 # TODO: clean things up
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
+    # handbrake
+    # transmission_4
+    transmission_4-gtk
+
     # terminal
     kitty
 
     # nicer cat
     bat
+
+    # proxy
+    proxychains
+
+    # tor
+    tor-browser
 
     # sddm theme
     catppuccin-sddm
@@ -17,8 +23,14 @@
     # self-explanatory
     home-manager
 
-    # inputs.zen-browser.packages."${system}".generic
-    (callPackage ./zen.nix {})
+    # firefox fork that, afaik, doesn't have all the privacy bullshit
+    (callPackage ./custom_derivations/zen/zen.nix {})
+
+    # my first actual derivation, a python TUI image visualiser
+    (callPackage ./custom_derivations/termvisage/termvisage.nix {})
+
+    # cheatsheet engine for the terminal
+    (callPackage ./custom_derivations/crub/crib.nix {})
 
     # terminal multiplexer
     zellij
@@ -151,6 +163,7 @@
 
     jq
     pandoc
+    silicon
 
     vipsdisp
 
