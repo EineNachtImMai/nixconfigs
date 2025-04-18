@@ -15,7 +15,7 @@ rustPlatform.buildRustPackage rec {
   };
 
   useFetchCargoVendor = true;
-  cargoHash = "sha256-mv4xgU4U9ovJltG2W5PNNUF70UuALcmBuq6sMgwSv4k=";
+  cargoHash = "sha256-9atn5qyBDy4P6iUoHFhg+TV6Ur71fiah4oTJbBMeEy4=";
 
   meta = {
     description = "Cheatsheet maker for the terminal";

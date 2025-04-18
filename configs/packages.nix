@@ -1,8 +1,8 @@
 # TODO: clean things up
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    # handbrake
-    # transmission_4
+    htop
+
     transmission_4-gtk
 
     # terminal
@@ -17,6 +17,9 @@
     # tor
     tor-browser
 
+    # vim inspired browser i wanna try out
+    vieb
+
     # sddm theme
     catppuccin-sddm
 
@@ -30,7 +33,7 @@
     (callPackage ./custom_derivations/termvisage/termvisage.nix {})
 
     # cheatsheet engine for the terminal
-    (callPackage ./custom_derivations/crub/crib.nix {})
+    # (callPackage ./custom_derivations/crib/crib.nix {})
 
     # terminal multiplexer
     zellij
@@ -41,6 +44,9 @@
     # manual pages
     tealdeer
     # wikiman
+
+    # email client
+    notmuch
 
     # app launchers
     wofi
