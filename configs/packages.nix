@@ -1,6 +1,13 @@
 # TODO: clean things up
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
+    yt-dlp
+    vdhcoapp
+
+    losslesscut-bin
+
+    libreoffice
+
     htop
 
     transmission_4-gtk
@@ -46,11 +53,10 @@
     # wikiman
 
     # email client
-    notmuch
+    # notmuch
 
     # app launchers
     wofi
-    # kando
 
     # shell
     zsh
@@ -59,7 +65,7 @@
     starship
 
     # network manager
-    wpa_supplicant_gui
+    # wpa_supplicant_gui
 
     pipewire
     wireplumber
@@ -111,10 +117,6 @@
 
     # Text editor
     neovim
-    # markdown-oxide
-
-    # TODO: uninstall instantly after the statistics test
-    rstudio
 
     # screenshot utilities
     slurp
@@ -152,11 +154,7 @@
     rustlings
     nodejs
     sqlite
-
-    # haskell
-    ghc
-    cabal-install
-    stack
+    typst
 
     # requirements for nvim plugins
     imagemagick
@@ -166,7 +164,6 @@
     (
       texlive.combine {inherit (pkgs.texlive) scheme-medium standalone varwidth preview;}
     )
-
     jq
     pandoc
     silicon
@@ -176,7 +173,8 @@
     mdbook
 
     # necessary for tauri development
-    pkg-config
+    /*
+       pkg-config
     gobject-introspection
     cargo-tauri
     at-spi2-atk
@@ -192,6 +190,7 @@
     pango
     webkitgtk_4_1
     openssl
+    */
 
     # Manim dependencies
     cairo
@@ -203,11 +202,13 @@
     # graphviz
 
     # the absolute nightmare that is trying to develop GLSL
-    SDL2
+    /*
+       SDL2
     SDL2.dev
     SDL2_ttf
     # mesa
     glslviewer
+    */
 
     # LSPs
     nixd
@@ -225,6 +226,7 @@
     glslls
     hyprls
     marksman
+    tinymist
 
     # fuzzy finder for the CLI
     fzf
@@ -232,17 +234,17 @@
     # Basically just bette cd
     zoxide
 
-    # YAML, JSON and XML processor
-    # yq
-
     # keyboard remapper
     kanata-with-cmd
 
     # learn typing
-    klavaro
+    # klavaro
 
     # PDF editor and annotator
     scribus
+
+    # lightweight pdf reader
+    (pkgs.zathura.override {plugins = with pkgs.zathuraPkgs; [zathura_pdf_mupdf];})
 
     # Code formatters
     alejandra
@@ -251,6 +253,7 @@
     isort
     black
     gotools
+    typstyle
 
     # because music is cool
     spotify
@@ -266,7 +269,7 @@
     # corsor theme
     catppuccin-cursors.mochaDark
 
-    # image editor that's like photoshop except very open and with slightly worse UI. Also it's free.
+    # image editor that's like photoshop except very open and with "slightly" worse UI. Also it's free.
     gimp
 
     # vector image editor
@@ -283,7 +286,7 @@
 
     # GREAT markdown editor / note-taking app. Free for personal use which is awesome. My current workflow is to write the notes in neovim
     # and read them in obsidian, because as much as i love my config and think it looks great, I can't for the life of me make 3rd/image.nvim work.
-    # I'll figure it out eventually but it just interacts really bad with NixOS as far as I can tell. Also ovsidian looks way better anyway.
+    # I'll figure it out eventually but it just interacts really bad with NixOS as far as I can tell. Also obsidian looks way better anyway.
     obsidian
   ];
 }

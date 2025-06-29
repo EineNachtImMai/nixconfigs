@@ -19,6 +19,7 @@
     ./configs/wireless.nix
     inputs.home-manager.nixosModules.home-manager
     ./configs/virtualization.nix
+    ./configs/kanata.nix
   ];
 
   catppuccin = {
@@ -43,7 +44,7 @@
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  #
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Configure network proxy if necessary
@@ -77,7 +78,6 @@
 
   # Install firefox.
   programs.firefox.enable = true;
-  # disabled because of the recent privacy poicy changed, finally motivated me to get zen-browser working on nixos
 
   programs.gnupg.agent.enable = true;
 
@@ -89,6 +89,8 @@
 
   # Enable hyprland
   programs.hyprland.enable = true;
+
+  programs.nix-ld.enable = true;
 
   services = {
     xserver = {
@@ -105,77 +107,7 @@
     };
   };
 
-  services.kanata = {
-    enable = true;
-    keyboards = {
-      internalKeyboard = {
-        devices = [
-          "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
-          "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2:1.0-event-kbd"
-          "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2.1:1.0-event-kbd"
-          "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2.2:1.0-event-kbd"
-          "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2.3:1.0-event-kbd"
-          "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2.4:1.0-event-kbd"
-        ];
-        extraDefCfg = "process-unmapped-keys yes";
-        config = ''
-          (defsrc
-          grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-          tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-          caps a    s    d    f    g    h    j    k    l    ;    '    ret
-          lsft z    x    c    v    b    n    m    ,    .    /    rsft
-          lctl lmet lalt           spc            ralt rmet rctl
-          )
-          (defvar
-              tap-time 150
-              hold-time 200
-          )
-          (defalias
-            cmd-lyr (layer-toggle command-layer)
-          )
-          (defalias
-              caps (tap-hold 150 200 esc @cmd-lyr)
-              a (tap-hold $tap-time $hold-time a lsft)
-              s (tap-hold $tap-time $hold-time s lctl)
-              d (tap-hold $tap-time $hold-time d lmet)
-              f (tap-hold $tap-time $hold-time f lalt)
-
-              m (tap-hold $tap-time $hold-time ; lsft)
-              l (tap-hold $tap-time $hold-time l lctl)
-              k (tap-hold $tap-time $hold-time k lmet)
-              j (tap-hold $tap-time $hold-time j lalt)
-          )
-
-          (deflayer base
-          _  _    _    _    _    _    _    _    _    _    _    _    _    _
-          _  _    _    _    _    _    _    _    _    _    _    _    _    _
-          @caps @a    @s    @d    @f    _    _    @j    @k    @l    @m    _    _
-          _ _    _    _    _    _    _    _    _    _    _    _
-          _ _ _           _            _ _ _
-          )
-
-          (deflayer empty-layer
-          _  _    _    _    _    _    _    _    _    _    _    _    _    _
-          _  _    _    _    _    _    _    _    _    _    _    _    _    _
-          _ _    _    _    _    _    _    _    _    _    _    _    _
-          _ _    _    _    _    _    _    _    _    _    _    _
-          _ _ _           _            _ _ _
-          )
-
-          (deflayer command-layer
-          _  _    _    _    _    _    _    _    _    _    _    _    _    _
-          _  _    _    ret    _    _    _    _    _    _    _    _    _    _
-          @caps _    _    _    _    _    left    down    up    right    _    _    _
-          _ _    _    _    _    _    _    _    _    _    _    _
-          _ _ _           _            _ _ _
-          )
-        '';
-      };
-    };
-  };
-
   # enable auto-update
-
   system.autoUpgrade = {
     enable = true;
     flake = "./flake.nix";
@@ -204,14 +136,9 @@
 
   # programs.kdeconnect.enable = true;
 
-  programs.tmux = {
-    enable = true;
-  };
-
   /*
-     services.kanata = {
+     programs.tmux = {
     enable = true;
-    keyboards."/dev/input/by-path/platform-i8042-serio-0-event-kbd".configFile = ./configs/kanata.kbd;
   };
   */
 
@@ -239,19 +166,8 @@
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSOR = "1";
-
     NIXOS_OZONE_WL = "1";
   };
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

@@ -2,10 +2,11 @@
   lib,
   fetchPypi,
   python3Packages,
+  pkgs,
   ...
 }: let
-  pillow = python3Packages.callPackage ./pillow.nix {};
-  term_image = python3Packages.callPackage ./termimage.nix {};
+  pillow = pkgs.callPackage ./pillow.nix {};
+  term_image = pkgs.callPackage ./termimage.nix {};
 in
   python3Packages.buildPythonPackage rec {
     pname = "termvisage";
