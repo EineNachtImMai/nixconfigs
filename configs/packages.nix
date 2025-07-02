@@ -217,6 +217,7 @@
     yaml-language-server
     pyright
     rust-analyzer
+    markdown-oxide
     # TODO: make all the following work with neovim, currently only the previous ones are working.
     typescript-language-server
     haskell-language-server
