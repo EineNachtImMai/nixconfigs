@@ -15,6 +15,7 @@
     ./configs/users.nix
     ./configs/fonts.nix
     ./configs/pipewire.nix
+    ./configs/common-docker.nix
     inputs.sops-nix.nixosModules.sops
     ./configs/wireless.nix
     inputs.home-manager.nixosModules.home-manager
@@ -108,7 +109,8 @@
   };
 
   # enable auto-update
-  /* system.autoUpgrade = {
+  /*
+     system.autoUpgrade = {
     enable = true;
     flake = "./flake.nix";
     flags = [
@@ -118,7 +120,8 @@
     ];
     dates = "02:00";
     randomizedDelaySec = "45min";
-  }; */
+  };
+  */
 
   programs.steam = {
     enable = true;
