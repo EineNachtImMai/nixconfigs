@@ -19,7 +19,7 @@
     inputs.sops-nix.nixosModules.sops
     ./configs/wireless.nix
     inputs.home-manager.nixosModules.home-manager
-    ./configs/virtualization.nix
+    # ./configs/virtualization.nix
     ./configs/kanata.nix
   ];
 
@@ -44,6 +44,7 @@
   };
 
   networking.hostName = "nixos"; # Define your hostname.
+  networking.nameservers = ["193.110.81.0" "185.253.5.0"];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -106,6 +107,9 @@
       theme = "catppuccin-mocha";
       package = pkgs.kdePackages.sddm;
     };
+    libinput = {
+      enable = true;
+    };
   };
 
   # enable auto-update
@@ -157,7 +161,7 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [80 443];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
