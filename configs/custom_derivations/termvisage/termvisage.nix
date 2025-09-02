@@ -2,9 +2,12 @@
   lib,
   fetchPypi,
   python3Packages,
-  pkgs,
   ...
 }: let
+  pkgs = import (fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/nixos-24.05.tar.gz";
+    sha256 = "0zydsqiaz8qi4zd63zsb2gij2p614cgkcaisnk11wjy3nmiq0x1s";
+  }) {};
   pillow = pkgs.callPackage ./pillow.nix {};
   term_image = pkgs.callPackage ./termimage.nix {};
 in
