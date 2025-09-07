@@ -1,0 +1,5 @@
+{...}: {
+  imports = [
+    ./dockers/searxng.nix
+  ];
+}
