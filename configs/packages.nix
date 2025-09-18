@@ -1,12 +1,28 @@
 # TODO: clean things up
-{pkgs, ...}: {
+{
+  inputs,
+  system,
+  pkgs,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
+    # firefox fork that, afaik, doesn't have all the privacy bullshit
+    inputs.zen-browser.packages."${system}".default
+
     yt-dlp
     vdhcoapp
 
+    signal-desktop
+
     losslesscut-bin
 
-    libreoffice
+    wineWowPackages.stable
+    wineWayland
+    winetricks
+    (bottles.override {removeWarningPopup = true;})
+    protontricks
+
+    # libreoffice
 
     htop
 
@@ -21,11 +37,10 @@
     # proxy
     proxychains
 
+    cudatoolkit
+
     # tor
     tor-browser
-
-    # vim inspired browser i wanna try out
-    vieb
 
     # sddm theme
     catppuccin-sddm
@@ -33,17 +48,17 @@
     # self-explanatory
     home-manager
 
-    # firefox fork that, afaik, doesn't have all the privacy bullshit
-    (callPackage ./custom_derivations/zen/zen.nix {})
-
     # my first actual derivation, a python TUI image visualiser
-    (callPackage ./custom_derivations/termvisage/termvisage.nix {})
+    # (callPackage ./custom_derivations/termvisage/termvisage.nix {})
+
+    # (callPackage ./custom_derivations/deezer/deezer.nix {})
+    deezer-enhanced
 
     # cheatsheet engine for the terminal
     # (callPackage ./custom_derivations/crib/crib.nix {})
 
     # terminal multiplexer
-    zellij
+    # zellij
 
     # task manager
     todoist-electron
@@ -60,15 +75,18 @@
 
     # shell
     zsh
+    zsh-abbr
+    zinit
     nushell
-    # carapace
+    eza
     starship
 
     # network manager
     # wpa_supplicant_gui
 
-    pipewire
-    wireplumber
+    # pipewire
+    # wireplumber
+
     xdg-desktop-portal-hyprland
 
     # chat app
@@ -83,18 +101,37 @@
           #!/usr/bin/env bash
 
           echo "Formatting dotfiles..."
-          alejandra /etc/nixos &>/dev/null || ( alejandra . ; echo "formatting failed!" && exit 1)
+          alejandra /etc/nixos
           echo "rebuilding NixOS..."
-          log_path="/home/blackstar/.nix-log/$(date -d today +%F--%T).log"
-          nixos-rebuild switch --flake /etc/nixos#blackstar --upgrade --show-trace 2>> "$log_path" || (grep -f "$log_path" --color error && exit 1)
+          nh os switch /etc/nixos -H enim
           echo "collecting garbage..."
-          nix-collect-garbage -d --delete-older-than 10d 2>> "$log_path" || (grep -f "$log_path" --color error && exit 1)
+          nh clean all --keep 5
           echo "Done!"
         '';
       }
     )
 
-    # video, audio, ... VLC is the greatest
+    (writeShellApplication {
+      name = "update";
+      runtimeInputs = [];
+      text = ''
+        #!/usr/bin/env bash
+
+        echo "Formatting dotfiles..."
+        alejandra /etc/nixos
+        echo "updating flake..."
+        nix flake update --flake /etc/nixos
+        echo "rebuilding NixOS..."
+        nh os switch /etc/nixos -H enim
+        echo "collecting garbage..."
+        nh clean all --keep 5
+        echo "Done!"
+      '';
+    })
+
+    jekyll
+
+    # video, audio, ... If there's a media format out there, it can open it
     vlc
 
     # secrets manager
@@ -110,6 +147,7 @@
     pamixer
     hyprpaper
     hyprlock
+    freetube
     hyprcursor
     wlogout
     dunst
@@ -138,13 +176,13 @@
         with ps; [
           numpy
           matplotlib
-          manim
-          opencv4
-          scikit-learn
-          astropy
-          beautifulsoup4
-          pandas
-          lxml
+          # manim
+          # opencv4
+          # scikit-learn
+          # astropy
+          # beautifulsoup4
+          # pandas
+          # lxml
         ]
     ))
     go
@@ -152,8 +190,8 @@
     rustc
     cargo
     rustlings
-    nodejs
-    sqlite
+    # sqlite
+    # nodejs
     typst
 
     # requirements for nvim plugins
@@ -168,47 +206,14 @@
     pandoc
     silicon
 
+    # for when geequie doesn't cut it
     vipsdisp
-
-    mdbook
-
-    # necessary for tauri development
-    /*
-       pkg-config
-    gobject-introspection
-    cargo-tauri
-    at-spi2-atk
-    atkmm
-    cairo
-    gdk-pixbuf
-    glib
-    gtk3
-    harfbuzz
-    librsvg
-    libsoup_2_4
-    libsoup_3
-    pango
-    webkitgtk_4_1
-    openssl
-    */
 
     # Manim dependencies
     cairo
     pango
     ffmpeg
     texlive.combined.scheme-small
-
-    # graph to image converter, needed it for a python project
-    # graphviz
-
-    # the absolute nightmare that is trying to develop GLSL
-    /*
-       SDL2
-    SDL2.dev
-    SDL2_ttf
-    # mesa
-    glslviewer
-    */
 
     # LSPs
     nixd
@@ -218,34 +223,35 @@
     pyright
     rust-analyzer
     markdown-oxide
-    # TODO: make all the following work with neovim, currently only the previous ones are working.
-    typescript-language-server
-    haskell-language-server
-    bash-language-server
-    arduino-language-server
-    glsl_analyzer
-    glslls
-    hyprls
-    marksman
     tinymist
+    # TODO: make all the following work with neovim, currently only the previous ones are working.
+    # typescript-language-server
+    # haskell-language-server
+    bash-language-server
+    # arduino-language-server
+    # glsl_analyzer
+    # glslls
+    # hyprls
+    marksman
 
     # fuzzy finder for the CLI
     fzf
 
-    # Basically just bette cd
+    # Basically just better cd
     zoxide
 
     # keyboard remapper
-    kanata-with-cmd
-
-    # learn typing
-    # klavaro
+    # kanata-with-cmd
 
     # PDF editor and annotator
-    scribus
+    # scribus
 
     # lightweight pdf reader
-    (pkgs.zathura.override {plugins = with pkgs.zathuraPkgs; [zathura_pdf_mupdf];})
+    (pkgs.zathura.override {
+      plugins = with pkgs.zathuraPkgs; [
+        zathura_pdf_mupdf
+      ];
+    })
 
     # Code formatters
     alejandra
@@ -256,31 +262,24 @@
     gotools
     typstyle
 
-    # because music is cool
-    spotify
-
     # Games stuff
     itch
-    ryujinx
-    pokemmo-installer
-
-    # useful for decompressing archives
-    unzip
+    ryubing
+    # pokemmo-installer
+    prismlauncher
+    beyond-all-reason
 
     # corsor theme
     catppuccin-cursors.mochaDark
 
     # image editor that's like photoshop except very open and with "slightly" worse UI. Also it's free.
-    gimp
+    # gimp
 
     # vector image editor
     inkscape
 
     # great git TUI because I DON'T KNOW how to use git other than clone pull push add commit, I swear I'll get to learning it eventually.
     lazygit
-
-    # Great terminal file browser with even image previews using the kitty protocol
-    yazi
 
     # good directory listing for visualization
     tree

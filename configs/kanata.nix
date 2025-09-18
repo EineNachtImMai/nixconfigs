@@ -33,6 +33,16 @@
           )
 
           (defalias
+            game (layer-switch gaming)
+            normal (layer-switch base)
+          )
+
+          (defalias
+            gaming-mode (tap-hold $tap-time $hold-time ' @game)
+            normal-mode (tap-hold $tap-time $hold-time ' @normal)
+          )
+
+          (defalias
             mouse-lyr (layer-toggle mouse-layer)
           )
 
@@ -69,7 +79,7 @@
           (deflayer base
           _  _    _    _    _    _    _    _    _    _    _    _    _    _
           _  _    _    @e    _    _    _    _    _    _    _    _    _    _
-          @caps @a    @s    @d    @f    _    _    @j    @k    @l    @m    _    _
+          @caps @a    @s    @d    @f    _    _    @j    @k    @l    @m    @gaming-mode    _
           _ _    _    _    _    _    _    _    _    _    _    _
           _ _ _           _            _ _ _
           )
@@ -96,6 +106,15 @@
           _ _    _    _    @slw    _    @msleft    @msdown    @msup    @msright    _    _    _
           _ _    _    _    _    _    _    _    _    _    _    _
           _ _ _           @vsl            _ _ _
+          )
+
+
+          (deflayer gaming
+          grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+          tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+          caps a    s    d    f    g    h    j    k    l    ;    @normal-mode    ret
+          lsft z    x    c    v    b    n    m    ,    .    /    rsft
+          lctl lmet lalt           spc            ralt rmet rctl
           )
         '';
       };

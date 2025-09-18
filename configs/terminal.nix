@@ -8,7 +8,7 @@
     enable = true;
     plugins = ["git"];
   };
-  programs.zsh.promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+  programs.zsh.promptInit = ''eval "$(starship init zsh)"'';
   programs.zsh.autosuggestions.enable = true;
   programs.zsh.syntaxHighlighting.enable = true;
 }

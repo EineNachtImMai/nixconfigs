@@ -13,12 +13,15 @@
       url = "github:raybbian/hyprtasking";
       inputs.hyprland.follows = "hyprland";
     };
+
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
   outputs = {
     nixpkgs,
     sops-nix,
     catppuccin,
+    zen-browser,
     home-manager,
     ...
   } @ inputs: let
@@ -31,7 +34,7 @@
     };
   in {
     # ↓ this is your host output in the flake schema
-    nixosConfigurations.blackstar = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.enim = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs system;};
       modules = [
         ./configuration.nix # <- your host entrypoint, `programs.nvf.*` may be defined here
