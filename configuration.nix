@@ -15,7 +15,7 @@
     ./configs/users.nix
     ./configs/fonts.nix
     ./configs/pipewire.nix
-    ./configs/dockers.nix
+    # ./configs/dockers.nix
     # ./configs/nvidia.nix
     inputs.sops-nix.nixosModules.sops
     ./configs/wireless.nix
@@ -88,6 +88,7 @@
       };
       videoDrivers = ["nvidia"];
     };
+
     displayManager.sddm = {
       enable = true;
       theme = "catppuccin-mocha";
