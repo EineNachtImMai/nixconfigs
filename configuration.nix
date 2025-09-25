@@ -6,7 +6,9 @@
   pkgs,
   inputs,
   ...
-}: {
+}: let
+  ultragrub = pkgs.callPackage ./configs/custom_derivations/ultrakill-grub-theme/ultragrub.nix {};
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -18,7 +20,7 @@
     # ./configs/dockers.nix
     # ./configs/nvidia.nix
     inputs.sops-nix.nixosModules.sops
-    ./configs/wireless.nix
+    # ./configs/wireless.nix
     inputs.home-manager.nixosModules.home-manager
     # ./configs/virtualization.nix
     ./configs/kanata.nix
@@ -41,7 +43,14 @@
     efi = {
       canTouchEfiVariables = true;
     };
-    systemd-boot.enable = true;
+    systemd-boot.enable = false;
+    grub = {
+      enable = true;
+      theme = ultragrub;
+      useOSProber = true;
+      efiSupport = true;
+      device = "nodev";
+    };
   };
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -90,9 +99,10 @@
       };
       videoDrivers = ["nvidia"];
     };
+
     displayManager.sddm = {
       enable = true;
-      theme = "catppuccin-mocha";
+      theme = "catppuccin-mocha-mauve";
       package = pkgs.kdePackages.sddm;
       wayland.enable = true;
     };
@@ -203,7 +213,7 @@
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [22 443];
+  networking.firewall.allowedTCPPorts = [443];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;

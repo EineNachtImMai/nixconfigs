@@ -43,6 +43,8 @@
 
     cudatoolkit
 
+    cudatoolkit
+
     # tor
     # tor-browser
 
@@ -194,8 +196,8 @@
     rustc
     cargo
     rustlings
-    # sqlite
-    # nodejs
+    sqlite
+    nodejs
     typst
 
     # requirements for nvim plugins
