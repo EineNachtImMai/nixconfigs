@@ -190,8 +190,8 @@
     rustc
     cargo
     rustlings
-    # sqlite
-    # nodejs
+    sqlite
+    nodejs
     typst
 
     # requirements for nvim plugins
@@ -276,7 +276,7 @@
     # gimp
 
     # vector image editor
-    inkscape
+    # inkscape
 
     # great git TUI because I DON'T KNOW how to use git other than clone pull push add commit, I swear I'll get to learning it eventually.
     lazygit

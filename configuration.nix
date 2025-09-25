@@ -18,7 +18,7 @@
     # ./configs/dockers.nix
     # ./configs/nvidia.nix
     inputs.sops-nix.nixosModules.sops
-    ./configs/wireless.nix
+    # ./configs/wireless.nix
     inputs.home-manager.nixosModules.home-manager
     # ./configs/virtualization.nix
     ./configs/kanata.nix
@@ -41,7 +41,14 @@
     efi = {
       canTouchEfiVariables = true;
     };
-    systemd-boot.enable = true;
+    systemd-boot.enable = false;
+    grub = {
+      enable = true;
+      theme = pkgs.catppuccin-grub;
+      useOSProber = true;
+      efiSupport = true;
+      device = "nodev";
+    };
   };
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -91,7 +98,7 @@
 
     displayManager.sddm = {
       enable = true;
-      theme = "catppuccin-mocha";
+      theme = "catppuccin-mocha-mauve";
       package = pkgs.kdePackages.sddm;
       wayland.enable = true;
     };
