@@ -7,7 +7,7 @@
   inputs,
   ...
 }: let
-  ultragrub = pkgs.callPackage ./config/custom_derivations/ultrakill-grub-theme/ultragrub.nix {};
+  ultragrub = pkgs.callPackage ./configs/custom_derivations/ultrakill-grub-theme/ultragrub.nix {};
 in {
   imports = [
     # Include the results of the hardware scan.
