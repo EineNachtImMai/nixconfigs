@@ -6,8 +6,8 @@
 }: {
   # imports = [catppuccin.homeManagerModules.catppuccin];
 
-  home.username = "blackstar";
-  home.homeDirectory = "/home/blackstar";
+  home.username = "enim";
+  home.homeDirectory = "/home/enim";
 
   home.pointerCursor = {
     gtk.enable = true;
@@ -24,6 +24,12 @@
       package = pkgs.catppuccin-gtk;
       name = "catppuccin-mocha";
     };
+  };
+
+  programs.git = {
+    enable = true;
+    userName = "EineNachtImMai";
+    userEmail = "titouan.cazaubieilh@proton.me";
   };
 
   /*
