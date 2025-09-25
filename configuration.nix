@@ -6,7 +6,9 @@
   pkgs,
   inputs,
   ...
-}: {
+}: let
+  ultragrub = pkgs.callPackage ./config/custom_derivations/ultrakill-grub-theme/ultragrub.nix {};
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -44,7 +46,7 @@
     systemd-boot.enable = false;
     grub = {
       enable = true;
-      theme = pkgs.catppuccin-grub;
+      theme = ultragrub;
       useOSProber = true;
       efiSupport = true;
       device = "nodev";
