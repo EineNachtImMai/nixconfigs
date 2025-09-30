@@ -20,7 +20,7 @@ in {
     # ./configs/dockers.nix
     # ./configs/nvidia.nix
     inputs.sops-nix.nixosModules.sops
-    # ./configs/wireless.nix
+    ./configs/wireless.nix
     inputs.home-manager.nixosModules.home-manager
     # ./configs/virtualization.nix
     ./configs/kanata.nix
@@ -40,16 +40,30 @@ in {
 
   # Bootloader.
   boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
+    /*
+       efi = {
+      # canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot";
     };
+    */
+
     systemd-boot.enable = false;
     grub = {
       enable = true;
+      efiInstallAsRemovable = true;
       theme = ultragrub;
       useOSProber = true;
       efiSupport = true;
-      device = "nodev";
+      devices = ["nodev"];
+      extraEntries = ''
+        menuentry "Reboot" {
+            reboot
+        }
+
+        menuentry "Poweroff" {
+            halt
+        }
+      '';
     };
   };
 
@@ -236,17 +250,4 @@ in {
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
-
-  systemd.services.startup-ade-server = {
-    enable = true;
-    wants = ["network-online.target"];
-    after = ["network-online.target" "network.target"];
-    wantedBy = ["multi-user.target"];
-    description = "My Cool User Service";
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = ''${pkgs.nix}/bin/nix run /home/enim/dev/rust/truc_ade'';
-      User = "enim";
-    };
-  };
 }
