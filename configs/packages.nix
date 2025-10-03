@@ -205,9 +205,11 @@
     mermaid-cli
     ghostscript
     tree-sitter
-    (
+    /*
+       (
       texlive.combine {inherit (pkgs.texlive) scheme-medium standalone varwidth preview;}
     )
+    */
     jq
     pandoc
     silicon
