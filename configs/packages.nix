@@ -12,6 +12,8 @@
     yt-dlp
     vdhcoapp
 
+    exegol
+
     cloudflared
 
     signal-desktop
