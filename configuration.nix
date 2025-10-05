@@ -5,13 +5,13 @@
   config,
   pkgs,
   inputs,
+  host,
   ...
 }: let
   ultragrub = pkgs.callPackage ./configs/custom_derivations/ultrakill-grub-theme/ultragrub.nix {};
 in {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
     ./configs/terminal.nix
     ./configs/packages.nix
     ./configs/users.nix
@@ -111,7 +111,6 @@ in {
         variant = "azerty";
         layout = "fr";
       };
-      videoDrivers = ["nvidia"];
     };
 
     displayManager.sddm = {
@@ -121,9 +120,6 @@ in {
       wayland.enable = true;
     };
   };
-
-  # Install firefox.
-  # programs.firefox.enable = true;
 
   programs = {
     gnupg.agent.enable = true;
@@ -171,27 +167,6 @@ in {
 
     graphics = {
       enable = true;
-    };
-
-    nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-      modesetting.enable = true;
-      open = false;
-      # nvidiaSettings = true;
-      # dynamicBoost.enable = true;
-      powerManagement.enable = false;
-      # powerManagement.finegrained = true;
-      #nvidiaPersistenced = true;
-
-      prime = {
-        offload = {
-          enable = true;
-          enableOffloadCmd = true;
-        };
-
-        intelBusId = "PCI:1:0:0";
-        nvidiaBusId = "PCI:0:2:0";
-      };
     };
   };
 

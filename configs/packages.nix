@@ -12,8 +12,6 @@
     yt-dlp
     vdhcoapp
 
-    exegol
-
     cloudflared
 
     signal-desktop
@@ -111,7 +109,7 @@
           echo "Formatting dotfiles..."
           alejandra /etc/nixos
           echo "rebuilding NixOS..."
-          nh os switch /etc/nixos -H enim
+          nh os switch /etc/nixos -H "$1"
           echo "collecting garbage..."
           nh clean all --keep 5
           echo "Done!"

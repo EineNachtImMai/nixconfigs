@@ -32,15 +32,22 @@
         allowUnfree = true;
       };
     };
+
+    mkHostConfig = host:
+      nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs system;};
+        modules = [
+          ./configuration.nix
+          ./hostconfig/${host}-hardware-configuration.nix
+          ./hostconfig/${host}-configuration.nix
+          sops-nix.nixosModules.sops
+          catppuccin.nixosModules.catppuccin
+        ];
+      };
   in {
     # ↓ this is your host output in the flake schema
-    nixosConfigurations.enim = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs system;};
-      modules = [
-        ./configuration.nix # <- your host entrypoint, `programs.nvf.*` may be defined here
-        sops-nix.nixosModules.sops
-        catppuccin.nixosModules.catppuccin
-      ];
-    };
+    nixosConfigurations.homelap = mkHostConfig "homelap";
+
+    nixosConfigurations.enim = mkHostConfig "enim";
   };
 }
