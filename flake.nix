@@ -48,6 +48,6 @@
     # ↓ this is your host output in the flake schema
     nixosConfigurations.homelap = mkHostConfig "homelap";
 
-    nixosConfigurations.enim = mkHostConfig "enim";
+    nixosConfigurations.worklap = mkHostConfig "worklap";
   };
 }
