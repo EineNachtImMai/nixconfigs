@@ -9,14 +9,12 @@
     # firefox fork that, afaik, doesn't have all the privacy bullshit
     inputs.zen-browser.packages."${system}".default
 
-    yt-dlp
-    vdhcoapp
+    /* yt-dlp
+    vdhcoapp */
 
     cloudflared
 
     signal-desktop
-
-    losslesscut-bin
 
     wineWowPackages.stable
     wineWayland
@@ -26,7 +24,7 @@
 
     # libreoffice
 
-    htop
+    # htop
 
     man-pages
 
@@ -40,10 +38,6 @@
 
     # proxy
     # proxychains
-
-    cudatoolkit
-
-    cudatoolkit
 
     # tor
     # tor-browser
@@ -83,7 +77,7 @@
     zsh
     zsh-abbr
     zinit
-    nushell
+    # nushell
     eza
     starship
 
@@ -135,13 +129,13 @@
       '';
     })
 
-    jekyll
+    # jekyll
 
     # video, audio, ... If there's a media format out there, it can open it
     vlc
 
     # secrets manager
-    sops
+    # sops
 
     # self-explanatory
     git
@@ -171,7 +165,7 @@
     fastfetch
 
     # lightweight image viewer
-    geeqie
+    # geeqie
 
     # recursively search a dir for some text (really a regex but shhhhhhhh)
     ripgrep
@@ -257,7 +251,6 @@
     ryubing
     # pokemmo-installer
     prismlauncher
-    beyond-all-reason
 
     # corsor theme
     catppuccin-cursors.mochaDark
