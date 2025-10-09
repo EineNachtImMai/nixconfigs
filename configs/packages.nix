@@ -9,8 +9,10 @@
     # firefox fork that, afaik, doesn't have all the privacy bullshit
     inputs.zen-browser.packages."${system}".default
 
-    /* yt-dlp
-    vdhcoapp */
+    /*
+       yt-dlp
+    vdhcoapp
+    */
 
     cloudflared
 
@@ -144,7 +146,7 @@
     waybar
     brightnessctl
     playerctl
-    pamixer
+    # pamixer
     hyprpaper
     hyprlock
     freetube
