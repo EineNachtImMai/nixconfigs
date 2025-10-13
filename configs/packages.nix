@@ -7,7 +7,7 @@
 }: {
   environment.systemPackages = with pkgs; [
     # firefox fork that, afaik, doesn't have all the privacy bullshit
-    inputs.zen-browser.packages."${system}".default
+    inputs.zen-browser.packages."${system}".twilight
 
     /*
        yt-dlp
