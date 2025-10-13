@@ -146,7 +146,7 @@
     waybar
     brightnessctl
     playerctl
-    # pamixer
+    pamixer
     hyprpaper
     hyprlock
     freetube
