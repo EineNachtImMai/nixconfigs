@@ -17,6 +17,7 @@ in {
     ./configs/users.nix
     ./configs/fonts.nix
     ./configs/pipewire.nix
+    ./configs/bluetooth.nix
     # ./configs/dockers.nix
     # ./configs/nvidia.nix
     inputs.sops-nix.nixosModules.sops
