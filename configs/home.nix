@@ -4,5 +4,5 @@
   catppuccin,
   ...
 }: {
-  imports = [./home-manager/default.nix];
+  imports = [./home-manager];
 }
