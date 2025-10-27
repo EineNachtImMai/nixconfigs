@@ -30,6 +30,8 @@
 
     man-pages
 
+    piper
+
     # transmission_4-gtk
 
     # terminal

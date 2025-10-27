@@ -103,6 +103,8 @@ in {
     # Enable CUPS to print documents.
     printing.enable = true;
 
+    ratbagd.enable = true;
+
     udisks2.enable = true;
 
     cloudflared.enable = true;
