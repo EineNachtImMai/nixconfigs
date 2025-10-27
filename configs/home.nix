@@ -9,10 +9,6 @@
   home.username = "enim";
   home.homeDirectory = "/home/enim";
 
-  wayland.windowManager.hyprland.plugins = [
-    pkgs.hyprlandPlugins.hyprexpo
-  ];
-
   home.pointerCursor = {
     gtk.enable = true;
     # x11.enable = true;

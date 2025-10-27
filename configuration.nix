@@ -23,6 +23,7 @@ in {
     inputs.sops-nix.nixosModules.sops
     ./configs/wireless.nix
     inputs.home-manager.nixosModules.home-manager
+    inputs.hyprland.nixosModules.default
     # ./configs/virtualization.nix
     ./configs/kanata.nix
   ];
@@ -133,6 +134,7 @@ in {
       enable = true;
       withUWSM = true;
       xwayland.enable = true;
+      plugins = with pkgs.hyprlandPlugins; [hyprexpo];
     };
 
     nix-ld.enable = true;
