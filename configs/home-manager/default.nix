@@ -12,6 +12,8 @@
     ./dunst.nix
     ./git.nix
     # ./hyprland.nix
+
+    ./config-symlinks.nix
   ];
 
   home.stateVersion = "24.11";
