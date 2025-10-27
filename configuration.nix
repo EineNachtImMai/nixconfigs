@@ -23,7 +23,7 @@ in {
     inputs.sops-nix.nixosModules.sops
     ./configs/wireless.nix
     inputs.home-manager.nixosModules.home-manager
-    inputs.hyprland.nixosModules.default
+    # inputs.hyprland.nixosModules.default
     # ./configs/virtualization.nix
     ./configs/kanata.nix
   ];
