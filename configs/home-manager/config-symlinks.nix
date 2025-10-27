@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  symlinkRoot = ./dotfiles;
+  symlinkRoot = /home/enim/dev/nix/dotfiles/;
   inherit (config.lib.file) mkOutOfStoreSymlink;
   inherit (lib) flatten flip map mergeAttrsList;
 
