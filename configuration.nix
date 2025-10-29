@@ -8,7 +8,7 @@
   ultragrub = pkgs.callPackage ./configs/custom_derivations/ultrakill-grub-theme/ultragrub.nix {};
 in {
   imports = [
-    ./configs/
+    ./configs
     # inputs.hyprland.nixosModules.default
   ];
 
