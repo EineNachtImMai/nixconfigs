@@ -16,5 +16,10 @@
     ./wireless.nix
     inputs.home-manager.nixosModules.home-manager
     ./kanata.nix
+    ./bootloader.nix
+    ./time-and-locale.nix
+    ./networking.nix
+    ./services.nix
+    ./programs.nix
   ];
 }
