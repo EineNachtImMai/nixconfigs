@@ -1,14 +1,10 @@
 {pkgs, ...}: {
   # make zsh default
-  programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
-  # # Enable Oh-my-zsh
-  programs.zsh.ohMyZsh = {
+  programs.zsh = {
     enable = true;
-    plugins = ["git"];
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
   };
-  programs.zsh.promptInit = ''eval "$(starship init zsh)"'';
-  programs.zsh.autosuggestions.enable = true;
-  programs.zsh.syntaxHighlighting.enable = true;
 }
