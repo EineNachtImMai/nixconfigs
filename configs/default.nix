@@ -21,5 +21,6 @@
     ./networking.nix
     ./services.nix
     ./programs.nix
+    ./virtualiztion.nix
   ];
 }
