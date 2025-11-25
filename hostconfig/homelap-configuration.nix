@@ -31,7 +31,5 @@
     beyond-all-reason
 
     cudatoolkit
-
-    gamemode
   ];
 }

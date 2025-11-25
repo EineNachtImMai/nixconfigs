@@ -198,6 +198,11 @@
     nodejs
     typst
 
+    # hacking & rev
+    ghidra
+    gef
+    # wordlists
+
     # requirements for nvim plugins
     imagemagick
     mermaid-cli
@@ -255,6 +260,7 @@
     ryubing
     # pokemmo-installer
     prismlauncher
+    gamemode
 
     # corsor theme
     catppuccin-cursors.mochaDark
