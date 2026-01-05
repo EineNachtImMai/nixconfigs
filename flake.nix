@@ -9,6 +9,8 @@
 
     catppuccin.url = "github:catppuccin/nix";
 
+    # ashell.url = "github:MalpenZibo/ashell";
+
     # hyprland.url = "github:hyprwm/Hyprland";
 
     zen-browser = {

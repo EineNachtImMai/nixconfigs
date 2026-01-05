@@ -208,11 +208,6 @@
     mermaid-cli
     ghostscript
     tree-sitter
-    /*
-       (
-      texlive.combine {inherit (pkgs.texlive) scheme-medium standalone varwidth preview;}
-    )
-    */
     jq
     pandoc
     silicon
@@ -281,5 +276,8 @@
     # and read them in obsidian, because as much as i love my config and think it looks great, I can't for the life of me make 3rd/image.nvim work.
     # I'll figure it out eventually but it just interacts really bad with NixOS as far as I can tell. Also obsidian looks way better anyway.
     obsidian
+
+    # (callPackage ./custom_derivations/ashell/ashell.nix {})
+    # inputs.ashell.packages.${pkgs.system}.default
   ];
 }
