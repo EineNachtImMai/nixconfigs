@@ -18,11 +18,7 @@
 
     signal-desktop
 
-    wineWowPackages.stable
-    wineWayland
-    winetricks
     (bottles.override {removeWarningPopup = true;})
-    protontricks
 
     # libreoffice
 
@@ -279,5 +275,6 @@
 
     # (callPackage ./custom_derivations/ashell/ashell.nix {})
     # inputs.ashell.packages.${pkgs.system}.default
+    tuxguitar
   ];
 }
