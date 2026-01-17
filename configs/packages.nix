@@ -17,12 +17,13 @@
     cloudflared
 
     signal-desktop
+    telegram-desktop
 
-    wineWowPackages.stable
-    wineWayland
-    winetricks
+    # wineWowPackages.stable
+    # wine-wayland
+    # winetricks
     (bottles.override {removeWarningPopup = true;})
-    protontricks
+    # protontricks
 
     # libreoffice
 
