@@ -32,6 +32,7 @@
 
     # terminal
     kitty
+    wezterm
 
     # nicer cat
     bat
@@ -87,7 +88,7 @@
     # pipewire
     # wireplumber
 
-    xdg-desktop-portal-hyprland
+    xdg-desktop-portal-wlr
 
     # chat app
     discord
@@ -145,13 +146,14 @@
     brightnessctl
     playerctl
     pamixer
-    hyprpaper
+    # hyprpaper
     hyprlock
     freetube
-    hyprcursor
+    # hyprcursor
     wlogout
     dunst
     libnotify
+    swaybg
 
     # Text editor
     neovim

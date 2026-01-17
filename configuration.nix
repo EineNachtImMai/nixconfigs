@@ -9,6 +9,8 @@
     ./configs
   ];
 
+  programs.mango.enable = true;
+
   catppuccin = {
     tty.enable = true;
   };
