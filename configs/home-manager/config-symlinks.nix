@@ -42,6 +42,8 @@
     "waybar"
     "wofi"
     "zsh-abbr"
+    "mango"
+    "wezterm"
   ];
 
   links = flatMerge [confFiles confDirs];

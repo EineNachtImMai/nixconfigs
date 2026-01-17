@@ -17,12 +17,18 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    mango = {
+      url = "github:DreamMaoMao/mangowc";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     nixpkgs,
     sops-nix,
     catppuccin,
+    mango,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -42,6 +48,7 @@
           ./hostconfig/${host}-configuration.nix
           sops-nix.nixosModules.sops
           catppuccin.nixosModules.catppuccin
+          mango.nixosModules.mango
         ];
       };
   in {

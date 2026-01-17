@@ -19,11 +19,7 @@
     signal-desktop
     telegram-desktop
 
-    # wineWowPackages.stable
-    # wine-wayland
-    # winetricks
     (bottles.override {removeWarningPopup = true;})
-    # protontricks
 
     # libreoffice
 
@@ -37,6 +33,7 @@
 
     # terminal
     kitty
+    wezterm
 
     # nicer cat
     bat
@@ -92,7 +89,7 @@
     # pipewire
     # wireplumber
 
-    xdg-desktop-portal-hyprland
+    xdg-desktop-portal-wlr
 
     # chat app
     discord
@@ -150,13 +147,14 @@
     brightnessctl
     playerctl
     pamixer
-    hyprpaper
+    # hyprpaper
     hyprlock
     freetube
-    hyprcursor
+    # hyprcursor
     wlogout
     dunst
     libnotify
+    swaybg
 
     # Text editor
     neovim
@@ -280,5 +278,6 @@
 
     # (callPackage ./custom_derivations/ashell/ashell.nix {})
     # inputs.ashell.packages.${pkgs.system}.default
+    tuxguitar
   ];
 }
