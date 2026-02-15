@@ -1,8 +1,5 @@
 {
-  config,
-  pkgs,
   inputs,
-  host,
   ...
 }: {
   imports = [
@@ -10,6 +7,7 @@
   ];
 
   programs.mango.enable = true;
+  programs.niri.enable = true;
 
   catppuccin = {
     tty.enable = true;

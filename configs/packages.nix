@@ -8,6 +8,7 @@
   environment.systemPackages = with pkgs; [
     # firefox fork that, afaik, doesn't have all the privacy bullshit
     inputs.zen-browser.packages."${system}".twilight
+    inputs.noctalia.packages."${system}".default
 
     /*
        yt-dlp
@@ -192,9 +193,10 @@
     gcc
     rustc
     cargo
+    cargo-mommy # freaky cargo
     rustlings
     sqlite
-    nodejs
+    # nodejs
     typst
 
     # hacking & rev
@@ -224,6 +226,7 @@
     markdown-oxide # markdown
     tinymist # typst
     clang-tools # C
+    typescript-language-server
     # bash-language-server # bash
     # haskell-language-server
 
