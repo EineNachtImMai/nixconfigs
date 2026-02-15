@@ -25,12 +25,6 @@
 
   security.polkit.enable = true;
 
-  hardware = {
-    graphics = {
-      enable = true;
-    };
-  };
-
   # Allow unfree packages
   nixpkgs.config = {
     allowUnfree = true;
