@@ -1,13 +1,12 @@
-{
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     ./configs
   ];
 
   programs.mango.enable = true;
   programs.niri.enable = true;
+
+  wrappers.neovim.enable = true;
 
   catppuccin = {
     tty.enable = true;

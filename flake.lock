@@ -162,12 +162,33 @@
         "type": "github"
       }
     },
+    "noctalia": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1770991517,
+        "narHash": "sha256-7CVsb9eif+P0v3hMXs1nZhGD2NsnFkFrAOFWXDNwgbk=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "rev": "ba5c7d88c0bfa12f5600781a33203e2a8c66a4ec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
         "home-manager": "home-manager",
         "mango": "mango",
         "nixpkgs": "nixpkgs_2",
+        "noctalia": "noctalia",
         "sops-nix": "sops-nix",
         "zen-browser": "zen-browser"
       }
@@ -224,6 +245,7 @@
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
         "rev": "06f61b4e4f4f6ba8027c96a5611c63dc0db12b90",
+        "type": "github"
       },
       "original": {
         "owner": "0xc000022070",

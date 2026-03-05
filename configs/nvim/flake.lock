@@ -1,0 +1,150 @@
+{
+  "nodes": {
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1771923393,
+        "narHash": "sha256-Fy0+UXELv9hOE8WjYhJt8fMDLYTU2Dqn3cX4BwoGBos=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ea7f1f06811ce7fcc81d6c6fd4213150c23edcf2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "plugins-cmp-luasnip": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1730707109,
+        "narHash": "sha256-86lKQPPyqFz8jzuLajjHMKHrYnwW6+QOcPyQEx6B+gw=",
+        "owner": "saadparwaiz1",
+        "repo": "cmp_luasnip",
+        "rev": "98d9cb5c2c38532bd9bdb481067b20fea8f32e90",
+        "type": "github"
+      },
+      "original": {
+        "owner": "saadparwaiz1",
+        "repo": "cmp_luasnip",
+        "type": "github"
+      }
+    },
+    "plugins-lunar": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1680373478,
+        "narHash": "sha256-OBhADgq3MLUu+n0fvxGMM0s7CCZyQVghFMpA6ns7SNk=",
+        "owner": "LunarVim",
+        "repo": "lunar.nvim",
+        "rev": "08bbc93b96ad698d22fc2aa01805786bcedc34b9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LunarVim",
+        "repo": "lunar.nvim",
+        "type": "github"
+      }
+    },
+    "plugins-lze": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1771977048,
+        "narHash": "sha256-/mgHU8TEWRMbKYf5xw4XRieOOZpPpY+DtMcC6ti08Ao=",
+        "owner": "BirdeeHub",
+        "repo": "lze",
+        "rev": "e1b8c2e99fc1812fb79d309d2aad95fcdf0e01a5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "lze",
+        "type": "github"
+      }
+    },
+    "plugins-lzextras": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1771977030,
+        "narHash": "sha256-aSQPc1i9S4/flg4HF7vjYD8apiLnUjhRekH8lNVkXig=",
+        "owner": "BirdeeHub",
+        "repo": "lzextras",
+        "rev": "4c1a9f9a95d5f38335788803b4f5ee7b831b3a8e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "lzextras",
+        "type": "github"
+      }
+    },
+    "plugins-nvim-possession": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1757265155,
+        "narHash": "sha256-zQb1YXuTocwylcHuxcjragWTIvmXf4X8iFhbF0sxZMM=",
+        "owner": "gennaro-tedesco",
+        "repo": "nvim-possession",
+        "rev": "fa1a37ffcba9e8d708192ebb4b031b53679f0246",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gennaro-tedesco",
+        "repo": "nvim-possession",
+        "type": "github"
+      }
+    },
+    "plugins-ripgrep": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772209519,
+        "narHash": "sha256-sU3qM0qgiEPdBSOVXp/5Nt0m8g8xthuvYO+EPAm/MLQ=",
+        "owner": "BurntSushi",
+        "repo": "ripgrep",
+        "rev": "4519153e5e461527f4bca45b042fff45c4ec6fb9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BurntSushi",
+        "repo": "ripgrep",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "plugins-cmp-luasnip": "plugins-cmp-luasnip",
+        "plugins-lunar": "plugins-lunar",
+        "plugins-lze": "plugins-lze",
+        "plugins-lzextras": "plugins-lzextras",
+        "plugins-nvim-possession": "plugins-nvim-possession",
+        "plugins-ripgrep": "plugins-ripgrep",
+        "wrappers": "wrappers"
+      }
+    },
+    "wrappers": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1771743990,
+        "narHash": "sha256-KNTuqLytdRE0MVhM1hd3IJTlcOG6In/6klbiEDWYOaA=",
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "rev": "0ea455457dac3de9129498f5c50a35153ab56484",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
