@@ -28,7 +28,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvim-flake = {
-      url = "path:etc/nixos/configs/nvim/flake.nix";
+      url = "path:/etc/nixos/configs/nvim/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

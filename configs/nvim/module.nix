@@ -6,37 +6,6 @@ inputs: {
   ...
 }: let
   gitPlugins = config.nvim-lib.neovimPlugins;
-  custom-oil-nvim = pkgs.callPackage (
-    {
-      buildLuarocksPackage,
-      fetchurl,
-      fetchzip,
-      luaOlder,
-      pkgs,
-    }:
-      buildLuarocksPackage {
-        pname = "oil.nvim";
-        version = "2.15.0-1";
-        knownRockspec =
-          (fetchurl {
-            url = "mirror://luarocks/oil.nvim-2.15.0-1.rockspec";
-            sha256 = "0xkych23rn6jpj4hbam1j7ca1gwb9z3lzfm7id3dvcqj8aysv77j";
-          }).outPath;
-        src = fetchzip {
-          url = "https://github.com/stevearc/oil.nvim/archive/v2.15.0.zip";
-          sha256 = "0rrv7wg0nwfj5fd6byxs4np1p18xxdzyv11ba6vqqh3s6z0qwawc";
-        };
-
-        disabled = luaOlder "5.1";
-        propagatedBuildInputs = [pkgs.vimPlugins.mini-icons];
-
-        meta = {
-          homepage = "https://github.com/stevearc/oil.nvim";
-          description = "Neovim file explorer: edit your filesystem like a buffer";
-          license.fullName = "MIT";
-        };
-      }
-  ) {};
 in {
   imports = [wlib.wrapperModules.neovim];
   # NOTE: see the tips and tricks section or the bottom of this file + flake inputs to understand this value
@@ -49,7 +18,8 @@ in {
   };
 
   # choose a directory for your config.
-  config.settings.config_directory = ./.;
+  # config.settings.config_directory = ./.;
+  config.settings.config_directory = "/etc/nixos/configs/home-manager/dotfiles/nvim";
   # you can also use an impure path!
   # config.settings.config_directory = lib.generators.mkLuaInline "vim.fn.stdpath('config')";
   # config.settings.config_directory = "/home/<USER>/.config/nvim";
@@ -180,7 +150,7 @@ in {
       todo-comments-nvim
       arrow-nvim
       nvim-neoclip-lua
-      custom-oil-nvim
+      gitPlugins.oil-nvim
       mini-nvim
       mini-icons
       flash-nvim

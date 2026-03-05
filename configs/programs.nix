@@ -24,7 +24,7 @@
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game localNetworkGameTransfers
     };
 
-    neovim.defaultEditor = true;
+    # neovim.defaultEditor = true;
 
     # Enable thunar as file manager
     thunar.enable = true;

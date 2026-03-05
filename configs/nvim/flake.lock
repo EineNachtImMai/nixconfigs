@@ -96,6 +96,22 @@
         "type": "github"
       }
     },
+    "plugins-oil-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1771914681,
+        "narHash": "sha256-hoTQoNEsCbZ0aZMUUUvgkC9NYjovjUUirw2FN9b9dn0=",
+        "owner": "stevearc",
+        "repo": "oil.nvim",
+        "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stevearc",
+        "repo": "oil.nvim",
+        "type": "github"
+      }
+    },
     "plugins-ripgrep": {
       "flake": false,
       "locked": {
@@ -120,6 +136,7 @@
         "plugins-lze": "plugins-lze",
         "plugins-lzextras": "plugins-lzextras",
         "plugins-nvim-possession": "plugins-nvim-possession",
+        "plugins-oil-nvim": "plugins-oil-nvim",
         "plugins-ripgrep": "plugins-ripgrep",
         "wrappers": "wrappers"
       }

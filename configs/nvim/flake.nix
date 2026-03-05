@@ -32,6 +32,10 @@
       url = "github:gennaro-tedesco/nvim-possession";
       flake = false;
     };
+    plugins-oil-nvim = {
+      url = "github:stevearc/oil.nvim";
+      flake = false;
+    };
     /*
        plugins-todo-nvim = {
       url = "github:Ackeraa/todo.nvim";

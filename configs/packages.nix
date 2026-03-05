@@ -160,7 +160,7 @@
     swaybg
 
     # Text editor
-    neovim
+    # neovim
 
     # screenshot utilities
     slurp
@@ -205,16 +205,6 @@
     ghidra
     gef
     # wordlists
-
-    (callPackage ./nvim/flake.nix {})
-    # requirements for nvim plugins
-    imagemagick
-    mermaid-cli
-    ghostscript
-    tree-sitter
-    jq
-    pandoc
-    silicon
 
     # for when geequie doesn't cut it
     vipsdisp
@@ -289,5 +279,7 @@
     # (callPackage ./custom_derivations/ashell/ashell.nix {})
     # inputs.ashell.packages.${pkgs.system}.default
     tuxguitar
+
+    inputs.nvim-flake.packages.${system}.default
   ];
 }
