@@ -3,16 +3,6 @@
     enable = true;
     keyboards = {
       internalKeyboard = {
-        /*
-           devices = [
-          "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
-          "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2:1.0-event-kbd"
-          "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2.1:1.0-event-kbd"
-          "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2.2:1.0-event-kbd"
-          "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2.3:1.0-event-kbd"
-          "/dev/input/by-path/pci-0000:03:00.4-usbv2-0:2.4:1.0-event-kbd"
-        ];
-        */
         extraDefCfg = "process-unmapped-keys yes";
         config = ''
           (defsrc

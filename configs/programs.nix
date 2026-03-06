@@ -6,15 +6,6 @@
       enable = true;
     };
 
-    /*
-       hyprland = {
-      enable = true;
-      withUWSM = true;
-      xwayland.enable = true;
-      # plugins = with pkgs.hyprlandPlugins; [hyprexpo];
-    };
-    */
-
     nix-ld.enable = true;
 
     steam = {

@@ -1,10 +1,4 @@
-{
-  config,
-  pkgs,
-  inputs,
-  host,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     ./terminal.nix
     ./packages.nix

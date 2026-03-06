@@ -1,17 +1,15 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     sops-nix.url = "github:Mic92/sops-nix";
 
     catppuccin.url = "github:catppuccin/nix";
-
-    # ashell.url = "github:MalpenZibo/ashell";
-
-    # hyprland.url = "github:hyprwm/Hyprland";
 
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";

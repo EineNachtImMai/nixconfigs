@@ -1,10 +1,23 @@
-{inputs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     ./configs
   ];
 
   programs.mango.enable = true;
   programs.niri.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-luminous
+    ];
+  };
 
   catppuccin = {
     tty.enable = true;

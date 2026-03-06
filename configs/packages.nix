@@ -3,11 +3,13 @@
   inputs,
   system,
   pkgs,
+  hm,
   ...
 }: {
   environment.systemPackages = with pkgs; [
     # firefox fork that, afaik, doesn't have all the privacy bullshit
     inputs.zen-browser.packages."${system}".twilight
+
     inputs.noctalia.packages."${system}".default
 
     /*
@@ -21,6 +23,7 @@
     telegram-desktop
 
     (bottles.override {removeWarningPopup = true;})
+    winboat
 
     netcat-gnu
 
@@ -53,9 +56,6 @@
     # self-explanatory
     home-manager
 
-    # my first actual derivation, a python TUI image visualiser
-    # (callPackage ./custom_derivations/termvisage/termvisage.nix {})
-
     # deezer package (unofficial)
     deezer-enhanced
 
@@ -86,13 +86,8 @@
     eza
     starship
 
-    # network manager
-    # wpa_supplicant_gui
-
-    # pipewire
+    pipewire
     # wireplumber
-
-    xdg-desktop-portal-wlr
 
     # chat app
     vesktop
@@ -146,7 +141,8 @@
     git
 
     # random hyprland/wayland config/ricing stuff
-    waybar
+    # waybar
+    xwayland-satellite
     brightnessctl
     playerctl
     pamixer
